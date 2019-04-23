@@ -8,8 +8,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/gs-tsyj/springboot-base.git #配置git仓库的地址
-          username: gs-tsyj
+          uri: https://github.com/guo503/springboot-base.git #配置git仓库的地址
+          username: guo503
           password: gs503178
           search-paths: gs-tsyj #配置git仓库下的相对地址，可以配置多个，用 , 分割
       label:  master        #配置文件所在的分支
