@@ -95,11 +95,11 @@ public class UserBusinessImpl implements UserBusiness {
         Result<List<UserVO>> result = Result.success(Lists.newArrayList(),0);
         UserCond userCond = new UserCond();
         BeanUtils.copyProperties(userVO, userCond);
-        List<User> users = userService.list(userCond);
         int count = userService.count(userCond);
         if (count == 0){
             return result;
         }
+        List<User> users = userService.list(userCond);
         List<UserVO> list = users.stream().map(e -> {
             UserVO vo = new UserVO();
             BeanUtils.copyProperties(e, vo);

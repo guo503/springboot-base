@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
 * 用户service实现类
 * @author guos
-* @date 2019/04/16 09:41
+* @date 2019/05/24 13:46
 */
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     * 查询用户
     * @param id id
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return User
     */
     @Override
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     * @param id id
     * @param userCond userCond
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return User
     */
     @Override
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     * 新增用户
     * @param user user
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return int
     */
     @Override
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
     * 新增并返回用户
     * @param user user
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return User
     */
     @Transactional
@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
     * 更新用户
     * @param user user
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return int
     */
     @Override
@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
     * 查询用户列表
     * @param ids ids
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return List<User>
     */
     @Override
@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
     * 查询用户列表
     * @param userCond userCond
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return List<User>
     */
     @Override
@@ -183,7 +183,7 @@ public class UserServiceImpl implements UserService {
     * 查询用户总数
     * @param userCond userCond
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return int
     */
     public int count(UserCond userCond) {
@@ -197,7 +197,7 @@ public class UserServiceImpl implements UserService {
     * 查询用户列表
     * @param userCond userCond
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return List<Integer>
     */
     @Override
@@ -216,7 +216,7 @@ public class UserServiceImpl implements UserService {
     * 将符合查询条件的用户列表转map
     * @param userCond userCond
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return Map<Integer, User>
     */
     @Override
@@ -235,7 +235,7 @@ public class UserServiceImpl implements UserService {
     * 将符合查询条件的用户列表转map
     * @param ids ids
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return Map<Integer, User>
     */
     @Override
@@ -255,7 +255,7 @@ public class UserServiceImpl implements UserService {
     * @param gtId gtId
     * @param userCond userCond
     * @author guos
-    * @date 2019/04/16 09:41
+    * @date 2019/05/24 13:46
     * @return List<User>
     */
     @Override
@@ -264,7 +264,7 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(userCond,"userCond不能为空");
         userCond.setGtId(gtId);
         userCond.setNum(1);
-        userCond.setRow(Page.getMaxRow());
+        userCond.setRow(Page.getMaxRow() - 1);
         return this.list(userCond);
     }
 }
