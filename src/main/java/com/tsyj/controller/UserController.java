@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 /**
 * 用户api类
 * @author guos
-* @date 2019/05/24 13:46
+* @date 2019/06/12 11:10
 */
 @CrossOrigin
 @RestController
@@ -29,7 +29,7 @@ public class UserController {
     * 查询用户
     * @param id id
     * @author guos
-    * @date 2019/05/24 13:46
+    * @date 2019/06/12 11:10
     * @return Result<UserVO>
     */
     @GetMapping("/{id}")
@@ -43,7 +43,7 @@ public class UserController {
     * 新增用户
     * @param userVO userVO
     * @author guos
-    * @date 2019/05/24 13:46
+    * @date 2019/06/12 11:10
     * @return Result<Object>
     */
     @PostMapping
@@ -58,7 +58,7 @@ public class UserController {
     * @param id id
     * @param userVO userVO
     * @author guos
-    * @date 2019/05/24 13:46
+    * @date 2019/06/12 11:10
     * @return Result<Object>
     */
     @PutMapping("/{id}")
@@ -73,7 +73,7 @@ public class UserController {
     * 查询用户列表
     * @param userVO userVO
     * @author guos
-    * @date 2019/05/24 13:46
+    * @date 2019/06/12 11:10
     * @return Result<List<UserVO>>
     */
     @GetMapping

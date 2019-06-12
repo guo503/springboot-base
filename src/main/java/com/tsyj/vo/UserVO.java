@@ -7,7 +7,7 @@ import lombok.Data;
 /**
 * 用户实体类
 * @author guos
-* @date 2019/05/24 13:46
+* @date 2019/06/12 11:10
 */
 @Data
 public class UserVO extends User implements Serializable {
