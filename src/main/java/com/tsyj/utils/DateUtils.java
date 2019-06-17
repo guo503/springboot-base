@@ -3,6 +3,8 @@ package com.tsyj.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -191,5 +193,74 @@ public class DateUtils {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");//This class is immutable and thread-safe.@since 1.8
         System.out.println(dateTimeFormatter.format(localDateTime));//2018-03-27 14:52:57
+    }
+
+
+    /**
+     * 根据指定参数kind，获取指定类型的Date日期(年月日)
+     * @param kind 指定参数
+     * @return Date 指定类型的Date
+     */
+    public static Date getFormatDate(Date date, int kind) {
+        String currentDateStr = formatDate( date , kind);
+        return toDate(currentDateStr, kind);
+    }
+
+    /**
+     * 根据kind输出string格式
+     *
+     * @param date
+     * @param kind
+     * @return
+     */
+    public static String formatDate(Date date, int kind) {
+        SimpleDateFormat sdf = new SimpleDateFormat(getDateFormat(kind));
+        return sdf.format(date);
+    }
+
+    private static String getDateFormat(int kind) {
+        String[] format = {"yyyy-MM-dd", // 0
+                "yyyy-MM-dd HH:mm:ss", // 1
+                "yyyy",// 2
+                "M",// 3
+                "dd", // 4
+                "yyyy年M月d日H点m分", // 5
+                "yyyy年M月d日", // 6
+                "H点m分", // 7
+                "yyyy/MM/dd HH:mm", // 8
+                "HH",// 9
+                "mm",// 10
+                "yyyyMMdd", // 11
+                "yyyyMMddHHmmss", // 12
+                "yyyy-MM-dd 23:59:59", // 13
+                "HH:mm:ss", // 14
+                "yyyy/MM/dd HH:mm:ss", // 15
+                "yyyy/MM/dd HH:mm",//16
+                "HHmmss",//17,
+                "HH:mm:ss", //18
+                "mmss", //19
+                "HH:mm", //20
+                "yyyy-MM-dd HH:mm" //21
+        };
+        return format[kind];
+    }
+
+    public static Date toDate(String dateText, int kind) {
+        String format = getDateFormat(kind);
+        if (dateText == null) {
+            return null;
+        }
+        DateFormat df = null;
+        try {
+            if (format == null) {
+                df = new SimpleDateFormat();
+            } else {
+                df = new SimpleDateFormat(format);
+            }
+            df.setLenient(false);
+            return df.parse(dateText);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }
