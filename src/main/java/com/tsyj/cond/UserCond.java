@@ -8,7 +8,7 @@ import lombok.Data;
 /**
 * 用户查询条件类
 * @author guos
-* @date 2019/06/12 11:10
+* @date 2019/07/04 15:30
 */
 @Data
 public class UserCond extends Page implements Serializable {

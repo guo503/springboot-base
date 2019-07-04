@@ -1,5 +1,8 @@
 package com.tsyj.business;
 
+
+import java.util.*;
+
 import com.tsyj.response.Result;
 import com.tsyj.vo.UserVO;
 import java.util.*;
@@ -68,4 +71,15 @@ public interface UserBusiness {
     * @date 2019/06/12 11:10
     */
     void doBatch(UserVO userVO);
+				
+			/**
+			* 根据条件物理删除用户
+			* @param userVO userVO
+			* @author guos
+			* @date 2019/07/04 15:10
+			* @return int
+			*/
+			int realDelete(UserVO userVO);
+
+
 }

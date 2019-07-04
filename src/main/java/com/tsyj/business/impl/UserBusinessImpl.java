@@ -1,5 +1,6 @@
 package com.tsyj.business.impl;
 
+
 import com.google.common.collect.Lists;
 import com.tsyj.business.UserBusiness;
 import com.tsyj.cond.UserCond;
@@ -141,4 +142,21 @@ public class UserBusinessImpl implements UserBusiness {
             logger.info("-----doBatch------,param: {}",userVO);
         }
     }
+				
+			/**
+			* 根据条件物理删除用户
+			* @param userVO userVO
+			* @author guos
+			* @date 2019/07/04 15:10
+			* @return int
+			*/
+			@Override
+			public int realDelete(UserVO userVO){
+			logger.info("-----realDelete------,param: {}",userVO);
+			UserCond userCond = new UserCond();
+			BeanUtils.copyProperties(userVO, userCond);
+			return userService.realDelete(userCond);
+			}
+
+
 }

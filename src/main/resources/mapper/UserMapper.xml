@@ -76,6 +76,11 @@
     </trim>
   </insert>
 
+  <delete id="realDelete" parameterType="com.tsyj.cond.UserCond">
+    delete from `user`
+    <include refid="cond_selective" />
+  </delete>
+
   <update id="update" parameterType="com.tsyj.po.User">
     update `user`
     <set>
@@ -118,7 +123,7 @@
   <sql id="cond_selective">
     <trim prefix="where" prefixOverrides="and">
       <if test="gtId != null">
-         and `id` &gt; #{gtId,jdbcType=INTEGER}
+         and `id` > #{gtId,jdbcType=INTEGER}
       </if>
       <if test="id != null ">
          and `id` = #{id,jdbcType=INTEGER}
