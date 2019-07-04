@@ -1,8 +1,5 @@
 package com.tsyj.business;
 
-
-import java.util.*;
-
 import com.tsyj.response.Result;
 import com.tsyj.vo.UserVO;
 import java.util.*;
@@ -10,7 +7,7 @@ import java.util.*;
 /**
 * 用户service类
 * @author guos
-* @date 2019/06/12 11:10
+* @date 2019/07/04 15:32
 */
 public interface UserBusiness {
     
@@ -18,7 +15,7 @@ public interface UserBusiness {
     * 查询用户
     * @param id id
     * @author guos
-    * @date 2019/06/12 11:10
+    * @date 2019/07/04 15:32
     * @return UserVO
     */
     UserVO get(Integer id);
@@ -28,17 +25,27 @@ public interface UserBusiness {
     * 新增用户
     * @param userVO userVO
     * @author guos
-    * @date 2019/06/12 11:10
+    * @date 2019/07/04 15:32
     * @return int
     */
     int save(UserVO userVO);
 
     
     /**
+    * 根据条件物理删除用户
+    * @param userVO userVO
+    * @author guos
+    * @date 2019/07/04 15:32
+    * @return int
+    */
+    int realDelete(UserVO userVO);
+
+    
+    /**
     * 更新用户
     * @param userVO userVO
     * @author guos
-    * @date 2019/06/12 11:10
+    * @date 2019/07/04 15:32
     * @return int
     */
     int update(UserVO userVO);
@@ -48,7 +55,7 @@ public interface UserBusiness {
     * 查询用户列表
     * @param userVO userVO
     * @author guos
-    * @date 2019/06/12 11:10
+    * @date 2019/07/04 15:32
     * @return Result<List<UserVO>>
     */
     Result<List<UserVO>> list(UserVO userVO);
@@ -58,28 +65,8 @@ public interface UserBusiness {
     * 查询用户总数
     * @param userVO userVO
     * @author guos
-    * @date 2019/06/12 11:10
+    * @date 2019/07/04 15:32
     * @return int
     */
     int count(UserVO userVO);
-
-    
-    /**
-    * 处理用户分批查询
-    * @param userVO userVO
-    * @author guos
-    * @date 2019/06/12 11:10
-    */
-    void doBatch(UserVO userVO);
-				
-			/**
-			* 根据条件物理删除用户
-			* @param userVO userVO
-			* @author guos
-			* @date 2019/07/04 15:10
-			* @return int
-			*/
-			int realDelete(UserVO userVO);
-
-
 }
