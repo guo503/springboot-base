@@ -263,4 +263,42 @@ public class DateUtils {
             return null;
         }
     }
+
+
+    /**
+     * 判断是否达到指定的连续天数
+     *
+     * @param dates        ：指定日期数组
+     * @param continueDays ：连续天数
+     * @return
+     * @author guos
+     * @date 2019/7/18 9:38
+     **/
+    public static boolean checkContinueDays(List<Date> dates, int continueDays) {
+        boolean isContinue = false;
+        int days = 1;
+        if (CollectionUtils.isEmpty(dates)) {
+            return days >= continueDays;
+        }
+        List<Date> dateList = new ArrayList<>();
+        for (Date date : dates) {
+            //yyyy-MM-dd
+            dateList.add(DateUtils.getFormatDate(date, 0));
+        }
+        int size = dateList.size();
+        for (int i = size - 1; i > 0; i--) {
+            if ((dateList.get(i).getTime() - dateList.get(i - 1).getTime()) / (1000 * 60 * 60 * 24) == 1) {
+                days++;
+                //已连续天数大于等于指定要达到的天数
+                if (days >= continueDays) {
+                    isContinue = true;
+                }
+            } else {
+                days = 1;
+            }
+        }
+        return isContinue;
+    }
+
+
 }
