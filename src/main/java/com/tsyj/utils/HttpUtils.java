@@ -48,7 +48,7 @@ public class HttpUtils {
      * @param param
      * @return
      */
-    public static String doGet(String url, Map<String, String> param) {
+    public static String doGet(String url, Map<String, Object> param) {
 
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -60,7 +60,7 @@ public class HttpUtils {
             URIBuilder builder = new URIBuilder(url);
             if (param != null) {
                 for (String key : param.keySet()) {
-                    builder.addParameter(key, param.get(key));
+                    builder.addParameter(key, param.get(key).toString());
                 }
             }
             URI uri = builder.build();
@@ -101,7 +101,7 @@ public class HttpUtils {
      * @param url
      * @return
      */
-    public static String doPost(String url, Map<String, String> param) {
+    public static String doPost(String url, Map<String, Object> param) {
         // 创建Httpclient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
@@ -113,7 +113,7 @@ public class HttpUtils {
             if (param != null) {
                 List<NameValuePair> paramList = new ArrayList<>();
                 for (String key : param.keySet()) {
-                    paramList.add(new BasicNameValuePair(key, param.get(key)));
+                    paramList.add(new BasicNameValuePair(key, param.get(key).toString()));
                 }
                 // 模拟表单
                 UrlEncodedFormEntity entity = new UrlEncodedFormEntity(paramList);

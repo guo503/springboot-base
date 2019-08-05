@@ -23,6 +23,7 @@
         <javax.resource.version>1.8</javax.resource.version>
         <fastjson.version>1.2.31</fastjson.version>
         <guava.version>19.0</guava.version>
+        <com.squareup.okhttp.version>2.7.5</com.squareup.okhttp.version>
     </properties>
 
     <dependencies>
@@ -166,6 +167,16 @@
             <artifactId>google-collections</artifactId>
             <version>1.0-rc2</version>
         </dependency>
+
+
+        <!-- okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${com.squareup.okhttp.version}</version>
+        </dependency>
+
+
 
     </dependencies>
 	

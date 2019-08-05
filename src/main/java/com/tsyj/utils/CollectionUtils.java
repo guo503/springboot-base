@@ -71,11 +71,11 @@ public class CollectionUtils extends org.springframework.util.CollectionUtils {
     }
 
 
-    private static <T> List<T> batchList(List<T> list) {
-        if (CollectionUtils.isEmpty(list)) {
-            return Lists.newArrayList();
+    public static <T> T getLastElement(List<T> list) {
+        if (isEmpty(list)) {
+            return null;
         }
-        return null;
+        return list.get(list.size() - 1);
     }
 
 
