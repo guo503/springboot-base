@@ -13,18 +13,18 @@ import java.util.Map;
  **/
 public class WxTest {
 
-    private static String dev_send_message_url = "http://192.168.10.202:18087/ac-crm/wx/sendMessage";
+    private static String dev_send_message_url = "http://192.168.10.202:18087/ac-crm//wx/sendMessage";
 
     private static String test_send_message_url = "http://192.168.10.209:18087/ac-crm/wx/sendMessage";
 
     private static String pre_send_message_url = "http://47.111.78.238:8087/ac-crm/wx/sendMessage";
 
-    private static String pro_send_message_url = "https://api.aircourses.com/ac-crm/wx/sendMessage";
+    private static String pro_send_message_url = "https://api.aircourses.com/ac-crm/wx/sendMessagetyyttyyy";
 
     public static void main(String[] args) {
         Map<String, Object> params = new HashMap<>();
-        params.put("template", "KRRo_tP8H4QNKavlSbJmm8dfcqmmzcg7HqBQdz3qoog");
-        params.put("classDate", "2019-08-20 12:00");
+        params.put("template", "EcniqC0diP0Cp8PA00XPjNzEuERSCbxp38iT-eSbVt8");
+        params.put("classDate", "2019-08-23");
         String res = HttpUtils.doGet(dev_send_message_url, params);
         System.out.println("请求结果：" + res);
     }

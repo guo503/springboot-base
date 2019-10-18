@@ -1,15 +1,13 @@
 package com.tsyj.utils;
 
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -19,8 +17,17 @@ import java.util.*;
  * @Date: create in 2018-01-03 16:22
  */
 public class DateUtils {
+
     private final static Logger logger = LoggerFactory.getLogger(DateUtils.class);
+
     public static SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日 HH:mm");
+
+    public static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static void main(String[] args) {
+        System.out.println(getDayOfWeekWithinDateInterval("2019-10-18","2019-10-28",0));
+    }
+
 
     /**
      * 日期格式化成字符串
@@ -152,20 +159,6 @@ public class DateUtils {
         return cal.getTime();
     }
 
-    public static void main(String[] args) {
-        //System.out.println(getCurrentTime());
-        // System.out.println(getOnlyDate(new Date(), 15, "yyyy-MM-dd HH:mm:ss"));
-
-        //logger.error("信息出错，id:{}",12);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //System.out.println(sdf.format(getExpireDate(new Date(),-7)));
-
-
-        LocalDateTime ldt1 = LocalDateTime.of(2018, 11, 1, 0, 0);
-        LocalDateTime ldt2 = LocalDateTime.now();
-        System.out.println(localDateTime2Date(ldt1).before(localDateTime2Date(ldt2)));
-    }
-
     /**
      * LocalDateTime转换为Date
      *
@@ -198,11 +191,12 @@ public class DateUtils {
 
     /**
      * 根据指定参数kind，获取指定类型的Date日期(年月日)
+     *
      * @param kind 指定参数
      * @return Date 指定类型的Date
      */
     public static Date getFormatDate(Date date, int kind) {
-        String currentDateStr = formatDate( date , kind);
+        String currentDateStr = formatDate(date, kind);
         return toDate(currentDateStr, kind);
     }
 
@@ -301,4 +295,129 @@ public class DateUtils {
     }
 
 
+    /**
+     * 根据日期获取当天是周几
+     *
+     * @param datetime 日期
+     * @return 周几
+     */
+    public static String dateToWeek(String datetime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+        Calendar cal = Calendar.getInstance();
+        Date date;
+        try {
+            date = sdf.parse(datetime);
+            cal.setTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        return weekDays[w];
+    }
+
+
+    /**
+     * 根据日期获取当天是周几
+     * 0周日 1周一 2周二 3周三 4周四 5周五 6周六
+     *
+     * @param date 日期
+     * @return 周几
+     */
+    public static int dateToWeek(Date date) {
+        int[] weekDays = {0, 1, 2, 3, 4, 5, 6};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getFormatDate(date, 0));
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        return weekDays[w];
+    }
+
+
+    /**
+     * 根据时间间隔，算出后面的时间。例如，24时，分成3部分，每个时间间隔是8小时
+     * 然后，初始时间加上8小时，得到新的时间，新的时间再加上8小时，得到另一个时间，依此类推
+     *
+     * @param totalHours 计算的总小时数
+     * @param part       将总小时分成的分数
+     * @param initTime   初始时间
+     * @return 计算后的时间列表
+     */
+    public static List<LocalDateTime> getGapTime(int totalHours, int part, LocalDateTime initTime) {
+        if (totalHours == 0) totalHours = 24;
+        if (part == 0) part = 1;
+        if (initTime == null) initTime = LocalDateTime.now();
+        long gap = totalHours / part;
+        List<LocalDateTime> timeList = Lists.newArrayList();
+        for (int i = 0; i < part; i++) {
+            long newGap = gap * i;
+            LocalDateTime newTime = initTime.plusHours(newGap);
+            timeList.add(newTime);
+        }
+        return timeList;
+    }
+
+
+    /**
+     * 根据天数获取第几周的第几天
+     *
+     * @param startDate 时间参考基数
+     * @return 第3周-4
+     */
+    public static String getWeekAndDays(LocalDate startDate, LocalDate endDate) {
+        //时间段内天数
+        Long between = endDate.toEpochDay() - startDate.toEpochDay();
+        between++;
+        int weeks = (int) (Math.ceil(between * 1.0 / 7));
+        long days = between.intValue() % 7 == 0 ? 7 : between % 7;
+        return new StringBuffer("第").append(weeks).append("周").append("-").append(days).toString();
+    }
+
+
+    /**
+     * 获取某段时间内的周一（二等等）的日期
+     *
+     * @param dataBegin 开始日期
+     * @param dataEnd   结束日期
+     * @param weekDays  获取周几，1－6代表周一到周六。0代表周日
+     * @return 返回日期List
+     */
+    public static List<Date> getDayOfWeekWithinDateInterval(String dataBegin, String dataEnd, int weekDays) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return getDateList(sdf.parse(dataBegin), sdf.parse(dataEnd), weekDays);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException("日期格式转化异常");
+        }
+    }
+
+
+    /**
+     * 获取某段时间内的周一（二等等）的日期
+     *
+     * @param dataBegin 开始日期
+     * @param dataEnd   结束日期
+     * @param weekDays  获取周几，1－6代表周一到周六。0代表周日
+     * @return 返回日期List
+     */
+    public static List<Date> getDayOfWeekWithinDateInterval(Date dataBegin, Date dataEnd, int weekDays) {
+        return getDateList(dataBegin, dataEnd, weekDays);
+    }
+
+
+    private static List<Date> getDateList(Date dataBegin, Date dataEnd, int weekDays) {
+        Date[] dates = {dataBegin, dataEnd};
+        List<Date> dateResult = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        for (Date date = dates[0]; date.compareTo(dates[1]) <= 0; ) {
+            cal.setTime(date);
+            if (cal.get(Calendar.DAY_OF_WEEK) - 1 == weekDays) {
+                //yyyy-MM-dd
+                dateResult.add(getFormatDate(date, 0));
+            }
+            cal.add(Calendar.DATE, 1);
+            date = cal.getTime();
+        }
+        return dateResult;
+    }
 }
