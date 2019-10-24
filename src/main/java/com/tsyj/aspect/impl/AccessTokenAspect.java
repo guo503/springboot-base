@@ -3,7 +3,7 @@ package com.tsyj.aspect.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.tsyj.aspect.AbstractAccessTokenAspect;
-import com.tsyj.constant.RedisConstant;
+import com.tsyj.consts.RedisConst;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
@@ -29,7 +29,7 @@ public class AccessTokenAspect extends AbstractAccessTokenAspect {
 
     @Override
     public JSONObject getUser(String accessToken) {
-        Object user = redisUtils.get(String.format(RedisConstant.ACCESS_TOKEN, accessToken));
+        Object user = redisUtils.get(String.format(RedisConst.ACCESS_TOKEN, accessToken));
         if (user != null) {
             return (JSONObject) JSON.toJSON(user);
         }

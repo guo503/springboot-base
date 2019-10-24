@@ -1,4 +1,4 @@
-package com.tsyj.constant;
+package com.tsyj.consts;
 
 /**
  * 错误码

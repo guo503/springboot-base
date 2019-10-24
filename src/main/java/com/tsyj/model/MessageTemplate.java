@@ -1,4 +1,4 @@
-package com.tsyj.po;
+package com.tsyj.model;
 
 import lombok.Getter;
 import lombok.Setter;

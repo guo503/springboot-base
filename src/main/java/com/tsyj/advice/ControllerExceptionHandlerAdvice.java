@@ -1,7 +1,7 @@
 package com.tsyj.advice;
 
-import com.tsyj.constant.BErrorCode;
-import com.tsyj.constant.IErrorCode;
+import com.tsyj.consts.BErrorCode;
+import com.tsyj.consts.IErrorCode;
 import com.tsyj.exception.BizException;
 import com.tsyj.exception.ServiceException;
 import com.tsyj.response.Result;

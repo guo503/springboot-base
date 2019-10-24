@@ -1,8 +1,8 @@
 package com.tsyj.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.tsyj.constant.BErrorCode;
-import com.tsyj.constant.IErrorCode;
+import com.tsyj.consts.BErrorCode;
+import com.tsyj.consts.IErrorCode;
 import lombok.Data;
 
 import java.io.Serializable;

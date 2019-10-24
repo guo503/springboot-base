@@ -1,6 +1,6 @@
 
 package com.tsyj.exception;
-import com.tsyj.constant.IErrorCode;
+import com.tsyj.consts.IErrorCode;
 import lombok.Data;
 
 /**

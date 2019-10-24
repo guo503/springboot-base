@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tsyj.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.tsyj.po.User">
+
+  <resultMap id="BaseResultMap" type="com.tsyj.model.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -12,76 +13,8 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
 
-  <sql id="Base_Column_List">
-    `id`, `name`, `phone`, `creator`, `create_time`, `updater`, `update_time`, `version`
-  </sql>
 
-  <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from `user`
-    where `id` = #{id,jdbcType=INTEGER}
-  </select>
-
-  <insert id="save" parameterType="com.tsyj.po.User">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into `user`
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="phone != null">
-        `phone`,
-      </if>
-      <if test="creator != null">
-        `creator`,
-      </if>
-      <if test="createTime != null">
-        `create_time`,
-      </if>
-      <if test="updater != null">
-        `updater`,
-      </if>
-      <if test="updateTime != null">
-        `update_time`,
-      </if>
-      <if test="version != null">
-        `version`,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null">
-        #{updater,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-
-  <delete id="realDelete" parameterType="com.tsyj.cond.UserCond">
-    delete from `user`
-    <include refid="cond_selective" />
-  </delete>
-
-  <update id="update" parameterType="com.tsyj.po.User">
+  <update id="update" parameterType="com.tsyj.model.User">
     update `user`
     <set>
       `version`=`version`+1,
@@ -109,62 +42,4 @@
        and `version`=#{version,jdbcType=INTEGER}
     </if>
   </update>
-
-  <select id="listByIds" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from `user`
-    where `id` in 
-    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
-      #{item}
-    </foreach>
-  </select>
-
-  <sql id="cond_selective">
-    <trim prefix="where" prefixOverrides="and">
-      <if test="gtId != null">
-         and `id` &gt; #{gtId,jdbcType=INTEGER}
-      </if>
-      <if test="id != null ">
-         and `id` = #{id,jdbcType=INTEGER}
-      </if>
-      <if test="name != null ">
-         and `name` = #{name,jdbcType=VARCHAR}
-      </if>
-      <if test="phone != null ">
-         and `phone` = #{phone,jdbcType=VARCHAR}
-      </if>
-      <if test="creator != null ">
-         and `creator` = #{creator,jdbcType=VARCHAR}
-      </if>
-      <if test="createTime != null ">
-         and `create_time` = #{createTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="updater != null ">
-         and `updater` = #{updater,jdbcType=VARCHAR}
-      </if>
-      <if test="updateTime != null ">
-         and `update_time` = #{updateTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="version != null ">
-         and `version` = #{version,jdbcType=INTEGER}
-      </if>
-    </trim>
-  </sql>
-
-  <select id="list" parameterType="com.tsyj.cond.UserCond" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from `user`
-    <include refid="cond_selective" />
-    limit #{start},#{row}
-  </select>
-
-  <select id="count" parameterType="com.tsyj.cond.UserCond" resultType="java.lang.Integer">
-    select 
-      count(*)
-    from `user`
-    <include refid="cond_selective" />
-  </select>
-
 </mapper>

@@ -1,26 +1,30 @@
-package com.tsyj.po;
+package com.tsyj.model;
 
 import com.tsyj.page.Page;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import mybatis.core.annotation.Id;
+import mybatis.core.annotation.Table;
 
 /**
 * 用户实体类
 * @author guos
-* @date 2019/07/04 15:32
+* @date 2019/10/24 11:19
 */
+@Table(name = "user")
 @Data
 public class User extends Page implements Serializable {
     
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 434438587679541L;
 
     /**
      * id
      */
+    @Id()
     private Integer id;
 
     /**
@@ -57,4 +61,23 @@ public class User extends Page implements Serializable {
      * 乐观锁
      */
     private Integer version;
+
+    
+    
+    
+    public static final String ID = "id";
+
+    public static final String NAME = "name";
+
+    public static final String PHONE = "phone";
+
+    public static final String CREATOR = "creator";
+
+    public static final String CREATE_TIME = "createTime";
+
+    public static final String UPDATER = "updater";
+
+    public static final String UPDATE_TIME = "updateTime";
+
+    public static final String VERSION = "version";
 }

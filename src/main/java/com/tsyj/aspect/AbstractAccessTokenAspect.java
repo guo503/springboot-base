@@ -2,8 +2,8 @@ package com.tsyj.aspect;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tsyj.annotation.AccessToken;
-import com.tsyj.constant.BErrorCode;
-import com.tsyj.constant.RedisConstant;
+import com.tsyj.consts.BErrorCode;
+import com.tsyj.consts.RedisConst;
 import com.tsyj.exception.BizException;
 import com.tsyj.thread.ReqThreadLocal;
 import com.tsyj.utils.RedisUtils;
@@ -94,9 +94,9 @@ public abstract class AbstractAccessTokenAspect {
                 ReqThreadLocal.setUserId(userId);
                 ReqThreadLocal.setUserName(userName);
                 // 刷新token过期时间
-                redisUtils.expire(String.format(RedisConstant.ACCESS_TOKEN, accessToken), ACCESS_TOKEN_TTL,
+                redisUtils.expire(String.format(RedisConst.ACCESS_TOKEN, accessToken), ACCESS_TOKEN_TTL,
                         TimeUnit.SECONDS);
-                redisUtils.expire(String.format(RedisConstant.LOGIN_SYS, userId), ACCESS_TOKEN_TTL,
+                redisUtils.expire(String.format(RedisConst.LOGIN_SYS, userId), ACCESS_TOKEN_TTL,
                         TimeUnit.SECONDS);
                 return;
             }

@@ -1,4 +1,4 @@
-package com.tsyj.constant;
+package com.tsyj.consts;
 
 /**
  * redis常量类
@@ -6,7 +6,7 @@ package com.tsyj.constant;
  * @author: guos
  * @date: 2019/4/3$ 13:01$
  **/
-public class RedisConstant {
+public class RedisConst {
 
 
     /**
