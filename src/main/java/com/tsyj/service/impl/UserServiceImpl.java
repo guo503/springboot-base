@@ -7,6 +7,7 @@ import com.tsyj.model.User;
 import com.tsyj.page.Page;
 import com.tsyj.service.UserService;
 import mybatis.core.entity.Condition;
+import mybatis.core.entity.LimitCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 /**
 * 用户service实现类
 * @author guos
-* @date 2019/10/24 11:19
+* @date 2019/10/26 14:30
 */
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
     * 查询用户
     * @param id id
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return User
     */
     @Override
@@ -47,10 +48,24 @@ public class UserServiceImpl implements UserService {
 
     
     /**
+    * 根据user查询用户
+    * @param user user
+    * @author guos
+    * @date 2019/10/26 14:30
+    * @return User
+    */
+    @Override
+    public User getOne(User user) {
+        Assert.notNull(user,"user不能为空");
+        return userMapper.getOnex(user);
+    }
+
+    
+    /**
     * 新增用户
     * @param user user
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return int
     */
     @Override
@@ -70,7 +85,7 @@ public class UserServiceImpl implements UserService {
     * 新增并返回用户
     * @param user user
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return User
     */
     @Transactional
@@ -85,7 +100,7 @@ public class UserServiceImpl implements UserService {
     * 更新用户
     * @param user user
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return int
     */
     @Override
@@ -102,7 +117,7 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isEmpty(user.getUpdateTime())) {
             user.setUpdateTime(new Date());
         }
-        int count = userMapper.update(user);
+        int count = userMapper.updatex(user);
         if (count == 0){
             throw new RuntimeException("用户信息更新失败!");
         }
@@ -111,10 +126,10 @@ public class UserServiceImpl implements UserService {
 
     
     /**
-    * 查询用户列表
+    * 
     * @param ids ids
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return List<User>
     */
     @Override
@@ -125,61 +140,88 @@ public class UserServiceImpl implements UserService {
         Condition<User> userCond = new Condition<>();
         userCond.createCriteria().andIn(User.ID, ids);
         userCond.limit(Page.getMaxRow());
-        return this.list(userCond);
+        return this.listByCondition(userCond);
     }
 
     
     /**
-    * 查询用户列表
-    * @param userCond userCond
+    * 根据po查询用户列表
+    * @param user user
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return List<User>
     */
     @Override
-    public List<User> list(Condition<User> userCond) {
+    public List<User> list(User user) {
+        Assert.notNull(user,"user不能为空");
+        return userMapper.listLimitx(user, new LimitCondition(user.getStart(), user.getRow()));
+    }
+
+    
+    /**
+    * 根据po查询用户总数
+    * @param user user
+    * @author guos
+    * @date 2019/10/26 14:30
+    * @return int
+    */
+    public int count(User user) {
+        Assert.notNull(user,"user不能为空");
+        return userMapper.countx(user);
+    }
+
+    
+    /**
+    * 根据条件类查询用户列表
+    * @param userCond userCond
+    * @author guos
+    * @date 2019/10/26 14:30
+    * @return List<User>
+    */
+    @Override
+    public List<User> listByCondition(Condition<User> userCond) {
         Assert.notNull(userCond,"userCond不能为空");
         return userMapper.listByConditionx(userCond);
     }
 
     
     /**
-    * 查询用户总数
+    * 根据条件类查询用户总数
     * @param userCond userCond
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return int
     */
-    public int count(Condition<User> userCond) {
+    public int countByCondition(Condition<User> userCond) {
         Assert.notNull(userCond,"userCond不能为空");
         return userMapper.countByConditionx(userCond);
     }
 
     
     /**
-    * 查询用户列表
+    * 
     * @param userCond userCond
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return List<Integer>
     */
     @Override
     public List<Integer> listId(Condition<User> userCond) {
-        List<User> list = this.list(userCond);
+        List<User> list = this.listByCondition(userCond);
         return list.stream().map(User::getId).distinct().collect(Collectors.toList());
     }
 
     
     /**
     * 将符合查询条件的用户列表转map
-    * @param userCond userCond
+    * @param user user
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return Map<Integer, User>
     */
     @Override
-    public Map<Integer, User> map(Condition<User> userCond) {
-        List<User> userList = this.list(userCond);
+    public Map<Integer, User> map(User user) {
+        List<User> userList = this.list(user);
         return userList.stream().collect(Collectors.toMap(User::getId, Function.identity()));
     }
 
@@ -188,7 +230,7 @@ public class UserServiceImpl implements UserService {
     * 将符合查询条件的用户列表转map
     * @param ids ids
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return Map<Integer, User>
     */
     @Override
@@ -203,7 +245,7 @@ public class UserServiceImpl implements UserService {
     * @param gtId gtId
     * @param userCond userCond
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return List<User>
     */
     @Override
@@ -212,6 +254,6 @@ public class UserServiceImpl implements UserService {
         userCond.limit(1,Page.getMaxRow() - 1);
         userCond.setOrderBy(User.ID);
         userCond.andCriteria().andGreaterThan(User.ID, gtId);
-        return this.list(userCond);
+        return this.listByCondition(userCond);
     }
 }

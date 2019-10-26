@@ -10,7 +10,7 @@ import mybatis.core.annotation.Table;
 /**
 * 用户实体类
 * @author guos
-* @date 2019/10/24 11:19
+* @date 2019/10/26 14:30
 */
 @Table(name = "user")
 @Data
@@ -19,7 +19,7 @@ public class User extends Page implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 434438587679541L;
+    private static final long serialVersionUID = 823943563559863L;
 
     /**
      * id

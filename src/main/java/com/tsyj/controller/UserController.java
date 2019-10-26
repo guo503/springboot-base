@@ -6,12 +6,10 @@ import com.tsyj.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
 * 用户api类
 * @author guos
-* @date 2019/10/24 11:19
+* @date 2019/10/26 14:30
 */
 @CrossOrigin
 @RestController
@@ -26,7 +24,7 @@ public class UserController {
     * 查询用户
     * @param id id
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return Result<UserVO>
     */
     @GetMapping("/{id}")
@@ -39,7 +37,7 @@ public class UserController {
     * 新增用户
     * @param userVO userVO
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return Result<Object>
     */
     @PostMapping
@@ -53,25 +51,12 @@ public class UserController {
     * @param id id
     * @param userVO userVO
     * @author guos
-    * @date 2019/10/24 11:19
+    * @date 2019/10/26 14:30
     * @return Result<Object>
     */
     @PutMapping("/{id}")
     public Result<Object> update(@PathVariable("id") Integer id, @RequestBody UserVO userVO) {
         userVO.setId(id);
         return userBusiness.update(userVO) > 0 ? Result.success("用户更新成功"): Result.fail("用户更新失败");
-    }
-
-    
-    /**
-    * 查询用户列表
-    * @param userVO userVO
-    * @author guos
-    * @date 2019/10/24 11:19
-    * @return Result<List<UserVO>>
-    */
-    @GetMapping
-    public Result<List<UserVO>> list(UserVO userVO) {
-        return userBusiness.list(userVO);
     }
 }

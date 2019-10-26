@@ -13,33 +13,4 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
 
-
-  <update id="update" parameterType="com.tsyj.model.User">
-    update `user`
-    <set>
-      `version`=`version`+1,
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        `phone` = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="creator != null">
-        `creator` = #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        `create_time` = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null">
-        `updater` = #{updater,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        `update_time` = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where `id` = #{id,jdbcType=INTEGER}
-    <if test="version != null">
-       and `version`=#{version,jdbcType=INTEGER}
-    </if>
-  </update>
 </mapper>
