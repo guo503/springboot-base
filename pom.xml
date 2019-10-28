@@ -16,9 +16,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-		<skipTests>true</skipTests>
+        <skipTests>true</skipTests>
         <commons.net.version>3.6</commons.net.version>
         <javax.resource.version>1.8</javax.resource.version>
         <fastjson.version>1.2.31</fastjson.version>
@@ -186,19 +186,19 @@
         </dependency>
 
 
-
     </dependencies>
-	
-	<build>
-	  <plugins>
-		<plugin>
-		  <groupId>org.springframework.boot</groupId> 
-		  <artifactId>spring-boot-maven-plugin</artifactId> 
-		  <configuration>
-			<executable>true</executable>
-		  </configuration>
-		</plugin>
-	  </plugins>
-</build>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
