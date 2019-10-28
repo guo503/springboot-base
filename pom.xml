@@ -194,6 +194,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <!--scope:system时，必须指定 -->
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
             </plugin>
