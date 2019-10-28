@@ -177,11 +177,11 @@
         </dependency>
 
 
-        <dependency>
+       <!-- <dependency>
             <groupId>com.tsyj</groupId>
             <artifactId>mybatis-base</artifactId>
             <version>1.0.0</version>
-        </dependency>
+        </dependency>-->
 
 
 

@@ -39,7 +39,7 @@ echo $APP_HOME
 cd $APP_HOME
 
 #设置JVM参数
-JVM_OPTS="-server -Xms128M -Xmx128M -Xss256k -Xmn48m -XX:MaxPermSize=64M -XX:+PrintGCDetails -Xloggc:$APP_HOME/log/gc.log -Djava.awt.headless=true "
+JVM_OPTS="-server -Xms128M -Xmx128M -Xss256k -Xmn48m -XX:MaxPermSize=64M -XX:+PrintGCDetails -Xloggc:$APP_HOME/log/gc.log -Djava.awt.headless=true -Xbootclasspath/a:../../lib/mybatis-base-1.0.0.jar"
 
 #获取打包后的jar文件名
 
