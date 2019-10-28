@@ -182,7 +182,7 @@
             <artifactId>mybatis-base</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}\mybatis-base-1.0.0.jar</systemPath>
+            <systemPath>${basedir}/mybatis-base-1.0.0.jar</systemPath>
         </dependency>
 
 
@@ -194,7 +194,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <executable>true</executable>
+                <!--    <executable>true</executable>-->
+                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
             </plugin>
         </plugins>
