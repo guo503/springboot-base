@@ -2,14 +2,19 @@ package com.tsyj.advice;
 
 import com.tsyj.consts.BErrorCode;
 import com.tsyj.consts.IErrorCode;
+import com.tsyj.enums.ErrorCodeEnum;
 import com.tsyj.exception.BizException;
 import com.tsyj.exception.ServiceException;
 import com.tsyj.response.Result;
 import com.tsyj.utils.ExceptionUtils;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,5 +63,26 @@ public class ControllerExceptionHandlerAdvice {
         } else {
             return Result.fail(errorMessage);
         }
+    }
+
+    /**
+     * 405 - Method Not Allowed
+     */
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public Result handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        logger.error("不支持当前请求方法", e);
+        return Result.fail(ErrorCodeEnum.METHOD_NOT_ALLOWED);
+    }
+
+    /**
+     * shiro权限异常处理
+     *
+     * @return
+     */
+    @ExceptionHandler(UnauthorizedException.class)
+    public Result unauthorizedException(UnauthorizedException e) {
+        logger.error(e.getMessage(), e);
+        return Result.fail(ErrorCodeEnum.UNAUTHO_ERROR);
     }
 }

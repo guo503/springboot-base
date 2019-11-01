@@ -1,20 +1,16 @@
 package com.tsyj.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.tsyj.consts.BErrorCode;
 import com.tsyj.consts.IErrorCode;
-import lombok.Data;
+import com.tsyj.enums.ErrorCodeEnum;
 
 import java.io.Serializable;
-import java.util.Date;
-
 
 /**
- *API返回类
- * @author: guos
- * @date: 2019/4/12 16:22
- **/
-@Data
+ * API返回类
+ *
+ * @author guos
+ * @date 2018年1月11日
+ */
 public class Result<T> implements Serializable {
 
     private final static long serialVersionUID = 1L;
@@ -35,47 +31,35 @@ public class Result<T> implements Serializable {
      */
     private Integer total;
     /**
-     * 当前时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
-    private Date currentTime = new Date();
-    /**
-     * 当前时间戳
-     */
-    private Long currentTimestamp = System.currentTimeMillis();
-    /**
      * 额外数据
      */
     private Object attach;
 
     public static <T> Result<T> success() {
         Result<T> result = new Result<T>();
-        result.setErrorCode(BErrorCode.OK.getCode());
+        result.setErrorCode(ErrorCodeEnum.OK.getCode());
         return result;
     }
 
     public static <T> Result<T> success(T data) {
-        Result<T> result = success();
+        Result<T> result = new Result<T>();
+        result.setErrorCode(ErrorCodeEnum.OK.getCode());
         result.setData(data);
         return result;
     }
 
     public static <T> Result<T> success(T data, int total) {
-        Result<T> result = success(data);
+        Result<T> result = new Result<T>();
+        result.setErrorCode(ErrorCodeEnum.OK.getCode());
+        result.setData(data);
         result.setTotal(total);
         return result;
     }
 
     public static <T> Result<T> fail() {
         Result<T> result = new Result<T>();
-        result.setErrorCode(BErrorCode.UNDEFINE_ERROR.getCode());
-        result.setErrorMessage(BErrorCode.UNDEFINE_ERROR.getMessage());
-        return result;
-    }
-
-    public static <T> Result<T> fail(String errorMessag) {
-        Result<T> result = fail();
-        result.setErrorMessage(errorMessag);
+        result.setErrorCode(ErrorCodeEnum.UNDEFINE_ERROR.getCode());
+        result.setErrorMessage(ErrorCodeEnum.UNDEFINE_ERROR.getMessage());
         return result;
     }
 
@@ -86,15 +70,64 @@ public class Result<T> implements Serializable {
         return result;
     }
 
-    public static <T> Result<T> fail(IErrorCode errorCode, String description) {
-        Result<T> result = fail();
-        result.setErrorCode(errorCode.getCode());
-        result.setErrorMessage(description);
+
+    public static <T> Result<T> fail(String errorMessage) {
+        Result<T> result = new Result<T>();
+        result.setErrorCode(ErrorCodeEnum.UNDEFINE_ERROR.getCode());
+        result.setErrorMessage(errorMessage);
+        return result;
+    }
+
+    public static <T> Result<T> fail(ErrorCodeEnum errorCodeEnum) {
+        Result<T> result = new Result<T>();
+        result.setErrorCode(errorCodeEnum.getCode());
+        result.setErrorMessage(errorCodeEnum.getMessage());
         return result;
     }
 
     public boolean isSuccess() {
-        return BErrorCode.OK.getCode() == errorCode;
+        return ErrorCodeEnum.OK.getCode() == errorCode;
+    }
+
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public Object getAttach() {
+        return attach;
+    }
+
+    public void setAttach(Object attach) {
+        this.attach = attach;
     }
 
     @Override
@@ -102,4 +135,6 @@ public class Result<T> implements Serializable {
         return "Result [errorCode=" + errorCode + ", errorMessage=" + errorMessage + ", data=" + data + ", total="
                 + total + ", attach=" + attach + "]";
     }
+
+
 }

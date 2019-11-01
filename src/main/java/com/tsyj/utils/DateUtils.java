@@ -25,9 +25,24 @@ public class DateUtils {
     public static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) {
-        System.out.println(getDayOfWeekWithinDateInterval("2019-10-18","2019-10-28",0));
+        System.out.println(getDayOfWeekWithinDateInterval("2019-10-18", "2019-10-28", 0));
     }
 
+
+    /**
+     * 转换为时间（天,时:分:秒.毫秒）
+     *
+     * @param timeMillis
+     * @return
+     */
+    public static String formatDateTime(long timeMillis) {
+        long day = timeMillis / (24 * 60 * 60 * 1000);
+        long hour = (timeMillis / (60 * 60 * 1000) - day * 24);
+        long min = ((timeMillis / (60 * 1000)) - day * 24 * 60 - hour * 60);
+        long s = (timeMillis / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+        long sss = (timeMillis - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000 - min * 60 * 1000 - s * 1000);
+        return (day > 0 ? day + "," : "") + hour + ":" + min + ":" + s + "." + sss;
+    }
 
     /**
      * 日期格式化成字符串
