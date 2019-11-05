@@ -1,5 +1,6 @@
 package com.tsyj.controller;
 
+import com.tsyj.annotation.NotEmpty;
 import com.tsyj.business.SysUserBusiness;
 import com.tsyj.response.Result;
 import com.tsyj.vo.SysUserVO;
@@ -44,6 +45,7 @@ public class SysUserController {
     * @return Result<Object>
     */
     @PostMapping
+    @NotEmpty({"loginName","password","name","phone"})
     public Result<Object> save(@RequestBody SysUserVO sysUserVO) {
         return sysUserBusiness.save(sysUserVO) > 0 ? Result.success("用户表添加成功"): Result.fail("用户表添加失败");
     }
@@ -58,6 +60,7 @@ public class SysUserController {
     * @return Result<Object>
     */
     @PutMapping("/{id}")
+    @NotEmpty({"loginName","password","name","phone"})
     public Result<Object> update(@PathVariable("id") Integer id, @RequestBody SysUserVO sysUserVO) {
         sysUserVO.setId(id);
         return sysUserBusiness.update(sysUserVO) > 0 ? Result.success("用户表更新成功"): Result.fail("用户表更新失败");

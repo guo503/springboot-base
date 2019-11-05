@@ -64,7 +64,7 @@ public class WechatLoginRealm extends AuthorizingRealm {
         SysUser user = sysUserService.getOne(userQuery);
         if (user == null) {
             // TODO 获取微信昵称、头像等信息，并完成注册用户，此处省略
-        } else if (user.getLoginFlag() == 0) {  // 用户为禁用状态
+        } else if (user.getIsUse() == 0) {  // 用户为禁用状态
             throw new DisabledAccountException();
         }
         // 完成登录，此处已经不需要做密码校验

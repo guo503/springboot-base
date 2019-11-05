@@ -68,7 +68,7 @@ public class UserPhoneRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
         // 用户为禁用状态
-        if (user.getLoginFlag() == 0) {
+        if (user.getIsUse() == 0) {
             throw new DisabledAccountException();
         }
 

@@ -15,7 +15,7 @@
     <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
     <result column="login_date" jdbcType="TIMESTAMP" property="loginDate" />
-    <result column="login_flag" jdbcType="TINYINT" property="loginFlag" />
+    <result column="is_use" jdbcType="TINYINT" property="isUse" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="is_del" jdbcType="TINYINT" property="isDel" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />

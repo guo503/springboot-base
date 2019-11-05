@@ -57,7 +57,7 @@ public class UserPasswordRealm extends AuthorizingRealm {
         SysUser user = sysUserService.getOne(userQuery);
         if (user != null) {
             // 用户为禁用状态
-            if (user.getLoginFlag() != 1) {
+            if (user.getIsUse() != 1) {
                 throw new DisabledAccountException();
             }
             SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(

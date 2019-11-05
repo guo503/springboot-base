@@ -30,8 +30,9 @@ public class MyModularRealmAuthenticator extends ModularRealmAuthenticator {
         // 登录类型
         LoginType loginType = token.getLoginType();
 
-        if (realmHashMap.get(loginType.getType()) != null) {
-            return doSingleRealmAuthentication(realmHashMap.get(loginType.getType()), token);
+        Realm realm = realmHashMap.get(loginType.getType());
+        if (realm != null) {
+            return doSingleRealmAuthentication(realm, token);
         } else {
             return doMultiRealmAuthentication(realms, token);
         }

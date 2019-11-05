@@ -82,7 +82,7 @@ CREATE TABLE `sys_user` (
   `photo` varchar(100) DEFAULT NULL COMMENT '用户头像',
   `login_ip` varchar(100) DEFAULT NULL COMMENT '最后登陆IP',
   `login_date` datetime DEFAULT NULL COMMENT '最后登陆时间',
-  `login_flag` tinyint(4) unsigned DEFAULT '0' COMMENT '是否可登录 0是 1否 默认0',
+  `is_use` tinyint(4) unsigned DEFAULT '1' COMMENT '是否可登录 0否 1是 默认1',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
   `is_del` tinyint(4) unsigned DEFAULT '0' COMMENT '是否删除，0未删除 1已删除 默认0',
   `creator` varchar(255) DEFAULT 'system' COMMENT '创建人姓名',
@@ -111,7 +111,7 @@ CREATE TABLE `sys_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户-角色';
 
 
-INSERT INTO sys_menu(parent_id, parent_ids, name, sort, permission, remarks)
+INSERT INTO sys_menu(parent_id, parent_ids, name, sort_no, permission, remarks)
 	VALUES(0,'0','测试', 1, 'sys:user:view', '1');
 
 INSERT INTO sys_role(name, en_name,is_sys, remarks)
@@ -120,7 +120,7 @@ INSERT INTO sys_role(name, en_name,is_sys, remarks)
 INSERT INTO sys_role_menu(role_id, menu_id)
 	VALUES(1,1);
 
-INSERT INTO sys_user(ilogin_name, `password`, role_id,name,mobile, remarks)
+INSERT INTO sys_user(login_name, `password`, role_id,name,mobile, remarks)
 	VALUES('admin', 'e10adc3949ba59abbe56e057f20f883e', 1, 'admin', '13866666666', '1');
 
 INSERT INTO sys_user_role(user_id, role_id)

@@ -1,11 +1,12 @@
 package com.tsyj.model;
 
 import com.tsyj.page.Page;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import mybatis.core.annotation.Id;
 import mybatis.core.annotation.Table;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
 * 用户表实体类
@@ -83,9 +84,9 @@ public class SysUser extends Page implements Serializable {
     private Date loginDate;
 
     /**
-     * 是否可登录 0是 1否 默认0
+     * 是否可登录 0否 1是 默认1
      */
-    private Byte loginFlag;
+    private Byte isUse;
 
     /**
      * 备注信息
@@ -149,7 +150,7 @@ public class SysUser extends Page implements Serializable {
 
     public static final String LOGIN_DATE = "loginDate";
 
-    public static final String LOGIN_FLAG = "loginFlag";
+    public static final String IS_USE = "isUse";
 
     public static final String REMARKS = "remarks";
 
