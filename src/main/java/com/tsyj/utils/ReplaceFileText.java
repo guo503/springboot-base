@@ -1,5 +1,3 @@
-package com.tsyj.utils;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -90,7 +88,7 @@ public class ReplaceFileText extends JFrame {
         panel.add(fileField, gbc_fileField);
         fileField.setColumns(10);
 
-        JLabel label = new JLabel("搜索文本：");
+        JLabel label = new JLabel("搜索内容：");
         GridBagConstraints gbc_label = new GridBagConstraints();
         gbc_label.anchor = GridBagConstraints.EAST;
         gbc_label.insets = new Insets(0, 0, 5, 5);
@@ -108,7 +106,7 @@ public class ReplaceFileText extends JFrame {
         panel.add(searchTextField, gbc_searchTextField);
         searchTextField.setColumns(10);
 
-        JLabel label_1 = new JLabel("替换为：");
+        JLabel label_1 = new JLabel("替换成为：");
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
         gbc_label_1.anchor = GridBagConstraints.EAST;
         gbc_label_1.insets = new Insets(0, 0, 5, 5);

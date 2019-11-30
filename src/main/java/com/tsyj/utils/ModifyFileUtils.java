@@ -1,5 +1,3 @@
-package com.tsyj.utils;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -38,8 +36,9 @@ public class ModifyFileUtils {
         if (!file.exists()) {
             throw new RuntimeException("文件不存在");
         }
+        String name = file.getName();
         if (file.isDirectory()) {
-            if (file.getName().contains(".git")) {
+            if (name.contains(".git") || name.contains(".target")) {
                 return;
             }
             File[] fs = file.listFiles();
@@ -49,9 +48,28 @@ public class ModifyFileUtils {
             for (File f : fs) {
                 travel(fileNames, f, oldStr, newStr);
             }
+            String filePath = file.getPath();
+            //如果是包路径替换时,在文件替换完后,将目录名也替换了
+            if (oldStr.contains("package") && newStr.contains("package") && oldStr.contains(".") && newStr.contains(".")) {
+                String[] o = oldStr.split("\\.");
+                String[] n = newStr.split("\\.");
+                int index = -1;
+                for (int i = 0; i < o.length; i++) {
+                    if (name.equals(o[i])) {
+                        index = i;
+                        break;
+                    }
+                }
+                //旧字符串能查到,且对应位置,旧的不等于新的
+                if (index >= 0 && index < n.length && !o[index].equals(n[index])) {
+                    String newPath = filePath.substring(0, filePath.lastIndexOf(File.separator) + 1) + n[index];
+                    System.out.println(newPath);
+                    file.renameTo(new File(newPath));
+                    fileNames.add(filePath);
+                }
+            }
         } else {
-            String name = file.getName();
-            boolean notNeed = name.contains(".gitignore") || name.contains(".impl");
+            boolean notNeed = name.contains(".gitignore") || name.contains(".iml");
             if (notNeed) {
                 return;
             }
