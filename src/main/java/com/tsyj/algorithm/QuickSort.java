@@ -7,6 +7,13 @@ package com.tsyj.algorithm;
  * @date: 2019/11/29$ 16:37$
  **/
 public class QuickSort {
+
+
+    public static void main(String[] args) {
+        int[] arr = {5, 2, 4, 9, 7};
+        QuickSort(arr, 0, arr.length - 1);
+    }
+
     /**
      * 快速排序方法
      * 快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，
@@ -24,10 +31,14 @@ public class QuickSort {
     public static int[] QuickSort(int[] array, int start, int end) {
         if (array.length < 1 || start < 0 || end >= array.length || start > end) return null;
         int smallIndex = partition(array, start, end);
-        if (smallIndex > start)
+        if (smallIndex > start) {
+            System.out.println("left");
             QuickSort(array, start, smallIndex - 1);
-        if (smallIndex < end)
+        }
+        if (smallIndex < end) {
+            System.out.println("right");
             QuickSort(array, smallIndex + 1, end);
+        }
         return array;
     }
 
@@ -41,14 +52,21 @@ public class QuickSort {
      */
     public static int partition(int[] array, int start, int end) {
         int pivot = (int) (start + Math.random() * (end - start + 1));
+        System.out.println("pivot = " + pivot);
         int smallIndex = start - 1;
         swap(array, pivot, end);
-        for (int i = start; i <= end; i++)
+        for (int i = start; i <= end; i++) {
             if (array[i] <= array[end]) {
                 smallIndex++;
                 if (i > smallIndex)
                     swap(array, i, smallIndex);
             }
+        }
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        System.out.println("smallIndex = " + smallIndex);
         return smallIndex;
     }
 
