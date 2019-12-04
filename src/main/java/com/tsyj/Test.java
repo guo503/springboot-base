@@ -1,8 +1,14 @@
 package com.tsyj;
 
+import com.google.common.collect.Lists;
+import com.tsyj.model.User;
 import org.xml.sax.InputSource;
 
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author: guos
@@ -30,5 +36,27 @@ public class Test {
         StringBuilder sb = new StringBuilder();
         sb.append(sql, 0, index).append(REPLACE_TOKEN);
         System.out.println(sb.toString());
+
+        List<User> userList = Lists.newArrayList();
+        User user1 = new User();
+        user1.setId(1);
+        user1.setName("gs");
+
+        User user2 = new User();
+        user1.setId(1);
+        user1.setName("tsyj");
+
+        User user3 = new User();
+        user3.setId(1);
+        user3.setName("guos");
+
+        userList.add(user1);
+        userList.add(user2);
+        userList.add(user3);
+        //Map<Integer, User> userMap = userList.stream().collect(Collectors.toMap(User::getId, u -> u, (k1, k2) -> k2));
+        Map<Integer, User> userMap = userList.stream().collect(Collectors.toMap(User::getId, Function.identity()));
+        for (Integer id : userMap.keySet()) {
+            System.out.println("key :" +id + " "+userMap.get(id).getName());
+        }
     }
 }
