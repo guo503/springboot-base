@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * xxl-job config
@@ -13,7 +14,9 @@ import org.springframework.context.annotation.Configuration;
  * @author xuxueli 2017-04-28
  */
 @Configuration
+@PropertySource(value = {"classpath:xxl-job.properties"})
 public class XxlJobConfig {
+
     private Logger logger = LoggerFactory.getLogger(XxlJobConfig.class);
 
     @Value("${xxl.job.admin.addresses}")
