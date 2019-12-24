@@ -211,6 +211,8 @@
             <groupId>com.tsyj</groupId>
             <artifactId>mybatis-base</artifactId>
             <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/mybatis-base-1.0.0.jar</systemPath>
         </dependency>
 
         <!-- xxl-job-core -->
