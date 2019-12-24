@@ -1,16 +1,37 @@
 package com.tsyj.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LocalFileUtils {
 
+    private final static Logger logger = LoggerFactory.getLogger(LocalFileUtils.class);
+
+
+    public static void main(String[] args) {
+        //String filePath = "d:/test.Java";
+        // LocalFileUtils.modifyLine(filePath, "package", "package com.tsyj.test;\n\n\nimport java.util.*;");
+        //LocalFileUtils.modifyLine(filePath, "}", "\tappend xxx\n}");
+
+        System.out.println(getPath("com.tsyj.common.service"));
+    }
+
+
     public static void readFile(File file) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         String line;
         while ((line = br.readLine()) != null) {
             System.out.println(line);
@@ -19,7 +40,7 @@ public class LocalFileUtils {
 
     public static void writeFile(File file, String content) throws IOException {
         FileOutputStream fos = new FileOutputStream(file);
-        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+        OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
         osw.write(content);
         osw.flush();
     }
@@ -27,7 +48,7 @@ public class LocalFileUtils {
     public static void appendFile(File file, String content) throws IOException {
         OutputStreamWriter out = new OutputStreamWriter(
                 new FileOutputStream(file, true), // true to append
-                "UTF-8"
+                StandardCharsets.UTF_8
         );
         out.write(content);
         out.close();
@@ -121,11 +142,48 @@ public class LocalFileUtils {
         return File.separator + packagePath.replace(".", File.separator) + File.separator;
     }
 
-    public static void main(String[] args) throws Exception {
-        //String filePath = "d:/test.Java";
-        // LocalFileUtils.modifyLine(filePath, "package", "package com.tsyj.test;\n\n\nimport java.util.*;");
-        //LocalFileUtils.modifyLine(filePath, "}", "\tappend xxx\n}");
 
-        System.out.println(getPath("com.tsyj.common.service"));
+    public static void doExport(String fileUrl, HttpServletRequest request, HttpServletResponse response) {
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+        String fileName = "学生作业-" + DateUtils.formatDate(new Date(), 0)+".xlsx";
+        try {
+            URL url = new URL(fileUrl);
+            InputStream inputStream = url.openStream();
+            request.setCharacterEncoding("UTF-8");
+            String agent = request.getHeader("User-Agent").toUpperCase();
+            if ((agent.indexOf("MSIE") > 0) || (agent.contains("RV") && (agent.contains("FIREFOX"))))
+                fileName = URLEncoder.encode(fileName, "UTF-8");
+            else {
+                fileName = new String(fileName.getBytes(StandardCharsets.UTF_8), "ISO8859-1");
+            }
+            response.setContentType("application/x-msdownload;");
+            response.setHeader("Content-disposition", "attachment; filename=" + fileName);
+            //response.setHeader("Content-Length", inputStream);
+            bis = new BufferedInputStream(inputStream);
+            bos = new BufferedOutputStream(response.getOutputStream());
+            byte[] buff = new byte[102400];
+            int bytesRead;
+            while (-1 != (bytesRead = bis.read(buff, 0, buff.length)))
+                bos.write(buff, 0, bytesRead);
+            System.out.println("success");
+            bos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("导出文件失败！");
+        } finally {
+            try {
+                if (bis != null) {
+                    bis.close();
+                }
+                if (bos != null) {
+                    bos.close();
+                }
+                //file.delete();
+            } catch (Exception e) {
+                logger.info("导出文件关闭流出错！", e);
+            }
+        }
     }
+
 }
