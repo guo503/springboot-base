@@ -2,6 +2,9 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 
+create database xxl_job;
+use xxl_job;
+
 drop table if exists sys_user;
 drop table if exists sys_menu;
 drop table if exists sys_role;
