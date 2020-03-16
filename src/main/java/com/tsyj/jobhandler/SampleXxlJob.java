@@ -2,7 +2,6 @@ package com.tsyj.jobhandler;
 
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.IJobHandler;
-import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.log.XxlJobLogger;
 import com.xxl.job.core.util.ShardingUtil;
 import org.slf4j.Logger;
@@ -35,7 +34,7 @@ public class SampleXxlJob {
     /**
      * 1、简单任务示例（Bean模式）
      */
-    @XxlJob("demoJobHandler")
+    //@XxlJob("demoJobHandler")
     public ReturnT<String> demoJobHandler(String param) throws Exception {
         XxlJobLogger.log("XXL-JOB, Hello World.");
         logger.info("XXL-JOB, Hello World.");
@@ -50,7 +49,7 @@ public class SampleXxlJob {
     /**
      * 2、分片广播任务
      */
-    @XxlJob("shardingJobHandler")
+    //@XxlJob("shardingJobHandler")
     public ReturnT<String> shardingJobHandler(String param) throws Exception {
 
         // 分片参数
@@ -73,7 +72,7 @@ public class SampleXxlJob {
     /**
      * 3、命令行任务
      */
-    @XxlJob("commandJobHandler")
+    //@XxlJob("commandJobHandler")
     public ReturnT<String> commandJobHandler(String param) throws Exception {
         String command = param;
         int exitValue = -1;
@@ -113,7 +112,7 @@ public class SampleXxlJob {
     /**
      * 4、跨平台Http任务
      */
-    @XxlJob("httpJobHandler")
+    //@XxlJob("httpJobHandler")
     public ReturnT<String> httpJobHandler(String param) throws Exception {
 
         // request
@@ -178,7 +177,7 @@ public class SampleXxlJob {
     /**
      * 5、生命周期任务示例：任务初始化与销毁时，支持自定义相关逻辑；
      */
-    @XxlJob(value = "demoJobHandler2", init = "init", destroy = "destroy")
+    //@XxlJob(value = "demoJobHandler2", init = "init", destroy = "destroy")
     public ReturnT<String> demoJobHandler2(String param) throws Exception {
         XxlJobLogger.log("XXL-JOB, Hello World.");
         return ReturnT.SUCCESS;

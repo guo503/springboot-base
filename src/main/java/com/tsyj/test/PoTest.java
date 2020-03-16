@@ -13,8 +13,7 @@ public class PoTest {
         user.setId(cnt);
         System.out.println(user.getId());*/
 
-
-      StringBuilder sb=new StringBuilder("abcde123456789").reverse();
-        System.out.println(sb.substring(0,11));
+      String str="abcde123456789";
+        System.out.println(new StringBuffer("57159540371").reverse());
     }
 }
