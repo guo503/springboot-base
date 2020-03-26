@@ -1,8 +1,10 @@
 package com.tsyj.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tsyj.model.User;
 
 import java.util.List;
 
@@ -68,6 +70,13 @@ public class JsonUtils {
         }
 
         return null;
+    }
+
+
+    public static void main(String[] args) {
+        JSONObject param=new JSONObject();
+        param.put("user",new User());
+        JSONObject.parseObject(new User().toString());
     }
 
 }

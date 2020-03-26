@@ -25,7 +25,8 @@ public class DateUtils {
     public static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void main(String[] args) {
-        System.out.println(getDayOfWeekWithinDateInterval("2019-10-18", "2019-10-28", 0));
+        //System.out.println(getDayOfWeekWithinDateInterval("2019-10-18", "2019-10-28", 0));
+
     }
 
 
