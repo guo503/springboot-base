@@ -12,3 +12,16 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户';
 
 insert into `user`(`name`,phone) values ('guos','18557521085');
+
+
+CREATE TABLE `tsyj`.`test_table1` (
+ `id` INT NOT NULL AUTO_INCREMENT,
+ `str_value` VARCHAR(45) NULL,
+ `date_value` DATETIME NULL,
+ `double_value` DOUBLE NULL,
+ PRIMARY KEY (`id`));
+
+
+INSERT INTO `tsyj`.`test_table1` (`str_value`, `date_value`, `double_value`) VALUES ('aaa', '2018-05-06 11:22:33', '1.65');
+UPDATE `tsyj`.`test_table1` SET `str_value`='bbb', `date_value`='2018-05-09 11:22:33', `double_value`='2.4' WHERE `id`='1';
+DELETE FROM `tsyj`.`test_table1` WHERE `id`='1';
