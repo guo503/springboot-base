@@ -47,3 +47,13 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
+
+binlog:
+  mysql:
+    hosts:
+      - name: test-db
+        host: 115.29.231.136
+        port: 3306
+        username: maxwell
+        password: 123456@Gs
+        timeOffset: 28800000

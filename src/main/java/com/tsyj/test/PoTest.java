@@ -1,5 +1,8 @@
 package com.tsyj.test;
 
+import com.google.common.collect.Lists;
+import com.tsyj.model.User;
+
 /**
  * @description:
  * @author: guos
@@ -8,12 +11,9 @@ package com.tsyj.test;
 public class PoTest {
 
     public static void main(String[] args) {
-    /*    Integer cnt = null;
-        User user = new User();
-        user.setId(cnt);
-        System.out.println(user.getId());*/
-
-      String str="abcde123456789";
-        System.out.println(new StringBuffer("57159540371").reverse());
+        User u1=new User();
+        u1.setName("u1");
+        u1.setPhone("111");
+        Lists.newArrayList();
     }
 }

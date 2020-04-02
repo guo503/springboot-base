@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
@@ -45,12 +47,14 @@ import java.util.stream.Collectors;
 public class BinlogThreadStarter {
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
+
+    private ExecutorService threadPool = Executors.newSingleThreadExecutor();
 
     //设计失误 其实只需要一个connection  已经写成这样了 就先不改了
     private Map<String, Connection> connectionPool = new HashMap<>();
@@ -60,7 +64,7 @@ public class BinlogThreadStarter {
 
         if (connection == null) {
             String url =  "jdbc:mysql://" + key +
-                    "/INFORMATION_SCHEMA?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
+                    "/INFORMATION_SCHEMA?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true";
 
             connection = DriverManager.getConnection(url, host.getUsername(), host.getPassword());
             connectionPool.put(key, connection);
@@ -98,7 +102,7 @@ public class BinlogThreadStarter {
             logListener.addListener(arr[0], arr[1], containers);
         });
 
-        new Thread(new BinLogListenerThread(host, logListener)).start();
+        threadPool.execute(new BinLogListenerThread(host, logListener));
 
         releaseConnection();
     }

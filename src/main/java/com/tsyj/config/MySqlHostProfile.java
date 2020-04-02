@@ -38,6 +38,7 @@ import java.util.Optional;
 @Configuration
 @ConfigurationProperties(prefix = "binlog.mysql")
 public class MySqlHostProfile {
+
     private List<MySqlHost> hosts;
 
     public List<MySqlHost> getHosts() {
@@ -54,6 +55,6 @@ public class MySqlHostProfile {
     }
 
     public MySqlHost getByNameAndThrow(String name) {
-        return getByName(name).orElseThrow(() -> new RuntimeException("未配置名为 "+name+" 的 binlog 连接信息"));
+        return getByName(name).orElseThrow(() -> new RuntimeException("未配置名为 " + name + " 的 binlog 连接信息"));
     }
 }

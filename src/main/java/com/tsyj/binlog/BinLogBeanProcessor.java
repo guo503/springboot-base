@@ -44,6 +44,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class BinLogBeanProcessor implements SmartInitializingSingleton {
+
     private ApplicationContext context;
 
     @Autowired
