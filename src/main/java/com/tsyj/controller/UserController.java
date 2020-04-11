@@ -3,7 +3,10 @@ package com.tsyj.controller;
 import com.tsyj.business.UserBusiness;
 import com.tsyj.response.Result;
 import com.tsyj.vo.UserVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,6 +18,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Value(value = "${pay.timeout.seconds}")
+    private Integer payTimeoutSeconds;
+
+    @Value(value = "${pay.frequency.seconds}")
+    private Integer createFrequencySeconds;
     
     @Autowired
     private UserBusiness userBusiness;
@@ -29,6 +40,8 @@ public class UserController {
     */
     @GetMapping("/{id}")
     public Result<UserVO> get(@PathVariable("id") Integer id) {
+        logger.info("payTimeoutSeconds:" + payTimeoutSeconds);
+        logger.info("createFrequencySeconds:" + createFrequencySeconds);
         return Result.success(userBusiness.get(id));
     }
 

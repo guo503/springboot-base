@@ -4,16 +4,6 @@ server:
 spring:
   application:
     name: springboot-base
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/guo503/springboot-base.git #配置git仓库的地址
-          username: guo503
-          password: gs503178
-          search-paths: gs-tsyj #配置git仓库下的相对地址，可以配置多个，用 , 分割
-      label:  master        #配置文件所在的分支
-      profile: dev
   datasource:
     name: test
     url: jdbc:mysql://115.29.231.136:3306/tsyj?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
@@ -57,3 +47,4 @@ binlog:
         username: maxwell
         password: 123456@Gs
         timeOffset: 28800000
+
