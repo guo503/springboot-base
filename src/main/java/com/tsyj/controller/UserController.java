@@ -1,5 +1,6 @@
 package com.tsyj.controller;
 
+import com.tsyj.apollo.config.OrderProperties;
 import com.tsyj.business.UserBusiness;
 import com.tsyj.response.Result;
 import com.tsyj.vo.UserVO;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     private UserBusiness userBusiness;
 
+    @Autowired
+    private OrderProperties orderProperties;
+
     
     /**
     * 查询用户
@@ -40,8 +44,12 @@ public class UserController {
     */
     @GetMapping("/{id}")
     public Result<UserVO> get(@PathVariable("id") Integer id) {
+        logger.info("-------------通过@value获取------------------");
         logger.info("payTimeoutSeconds:" + payTimeoutSeconds);
         logger.info("createFrequencySeconds:" + createFrequencySeconds);
+        logger.info("-------------通过@ConfigurationProperties获取------------------");
+        logger.info("payTimeoutSeconds:" + orderProperties.getPayTimeoutSeconds());
+        logger.info("createFrequencySeconds:" + orderProperties.getCreateFrequencySeconds());
         return Result.success(userBusiness.get(id));
     }
 
