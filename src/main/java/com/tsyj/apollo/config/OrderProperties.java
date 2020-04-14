@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "pay")
+@Data
 public class OrderProperties {
 
     /**
@@ -20,20 +21,4 @@ public class OrderProperties {
      * 支付频率
      */
     private Integer createFrequencySeconds;
-
-    public Integer getPayTimeoutSeconds() {
-        return payTimeoutSeconds;
-    }
-
-    public void setPayTimeoutSeconds(Integer payTimeoutSeconds) {
-        this.payTimeoutSeconds = payTimeoutSeconds;
-    }
-
-    public Integer getCreateFrequencySeconds() {
-        return createFrequencySeconds;
-    }
-
-    public void setCreateFrequencySeconds(Integer createFrequencySeconds) {
-        this.createFrequencySeconds = createFrequencySeconds;
-    }
 }
