@@ -1,0 +1,7 @@
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+com.tsyj.apollo.MyLogConfigurator
+
+# SpringApplicationRunListener
+org.springframework.boot.SpringApplicationRunListener=\
+com.tsyj.apollo.ApolloArgsRunListener
