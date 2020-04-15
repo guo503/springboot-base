@@ -72,7 +72,7 @@ public class ApolloArgsRunListener implements SpringApplicationRunListener, Orde
     }
 
     private Properties getResource() throws IOException {
-        String location = "/application.properties";
+        String location = "/application.yml";
         InputStream input = new ClassPathResource(location).getInputStream();
         Properties properties = new Properties();
         properties.load(input);
