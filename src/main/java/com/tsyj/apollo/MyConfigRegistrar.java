@@ -8,7 +8,6 @@ import com.ctrip.framework.apollo.spring.config.PropertySourcesProcessor;
 import com.ctrip.framework.apollo.spring.property.SpringValueDefinitionProcessor;
 import com.ctrip.framework.apollo.spring.util.BeanRegistrationUtil;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.event.SpringApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -53,13 +52,8 @@ public class MyConfigRegistrar implements ImportBeanDefinitionRegistrar, Applica
 
     @Override
     public void onApplicationEvent(SpringApplicationEvent event) {
-        // 给Key赋值
-        if (event instanceof ApplicationPreparedEvent) {
-            KeyHolder.init();
-        }
         // 启动监听配置变化
-        else if (event instanceof ApplicationReadyEvent) {
-            KeyListener.start();
+         if (event instanceof ApplicationReadyEvent) {
             AppListener.start();
         }
     }
