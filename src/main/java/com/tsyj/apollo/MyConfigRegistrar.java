@@ -12,7 +12,6 @@ import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.event.SpringApplicationEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -32,7 +31,7 @@ public class MyConfigRegistrar implements ImportBeanDefinitionRegistrar, Applica
 
         int order = attributes.getNumber("order");
 
-        PropertySourcesProcessor.addNamespaces(com.panda.sdk.apollo.ConfigContext.getNamespaces(), order);
+        PropertySourcesProcessor.addNamespaces(ConfigContext.getNamespaces(), order);
 
         Map<String, Object> propertySourcesPlaceholderPropertyValues = new HashMap<>();
         // to make sure the default PropertySourcesPlaceholderConfigurer's priority is higher than PropertyPlaceholderConfigurer
@@ -61,12 +60,7 @@ public class MyConfigRegistrar implements ImportBeanDefinitionRegistrar, Applica
         // 启动监听配置变化
         else if (event instanceof ApplicationReadyEvent) {
             KeyListener.start();
-            com.panda.sdk.apollo.AppListener.start();
+            AppListener.start();
         }
-    }
-
-    @Bean
-    public com.panda.sdk.apollo.KeyBeanPostProcessor keyBeanPostProcessor() {
-        return new com.panda.sdk.apollo.KeyBeanPostProcessor();
     }
 }

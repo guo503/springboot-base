@@ -39,13 +39,13 @@ public class ApolloArgsRunListener implements SpringApplicationRunListener, Orde
             }
             // 先从System Property（服务器上部署）
             Properties properties = System.getProperties();
-            String appId = properties.getProperty("app.id");
+            String appId = properties.getProperty("app:id");
             String env = properties.getProperty("env");
             if (appId == null || env == null) {
                 // 再从application.properties读取（本地开发用）
                 try {
                     Properties properties1 = getResource();
-                    appId = appId == null ? properties1.getProperty("app.id") : appId;
+                    appId = appId == null ? properties1.getProperty("app:id") : appId;
                     env = env == null ? properties1.getProperty("env") : env;
                     System.setProperty("app.id", appId);
                     System.setProperty("env", env);

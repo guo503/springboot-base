@@ -11,13 +11,13 @@ public class MyMetaServerProvider implements MetaServerProvider {
 
     private static final int ORDER = MetaServerProvider.HIGHEST_PRECEDENCE;
 
-    private static final String DEV_URL = "http://115.29.231.136/dev";
+    private static final String DEV_URL = "http://115.29.231.136:9080";
 
-    private static final String TEST_URL = "http://115.29.231.136/test";
+    private static final String TEST_URL = "http://115.29.231.136:9080/test";
 
-    private static final String PRE_URL = "http://115.29.231.136/pre";
+    private static final String PRE_URL = "http://115.29.231.136:9080/pre";
 
-    private static final String PROD_URL = "http://115.29.231.136/prod";
+    private static final String PROD_URL = "http://115.29.231.136:9080/prod";
 
     private static final Map<String, String> domains = new HashMap<>();
 
