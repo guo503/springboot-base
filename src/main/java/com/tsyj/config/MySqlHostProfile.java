@@ -34,9 +34,6 @@ import java.util.Optional;
  * @version 1.0
  * Date 2018/9/20 17:09
  */
-
-@Configuration
-@ConfigurationProperties(prefix = "binlog.mysql")
 public class MySqlHostProfile {
 
     private List<MySqlHost> hosts;

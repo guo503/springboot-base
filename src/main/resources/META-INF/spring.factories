@@ -1,6 +1,7 @@
 # Application Listeners
 org.springframework.context.ApplicationListener=\
-com.tsyj.apollo.MyLogConfigurator
+com.tsyj.apollo.MyLogConfigurator,\
+com.tsyj.apollo.MysqlBinLogConfigurator
 
 # SpringApplicationRunListener
 org.springframework.boot.SpringApplicationRunListener=\
