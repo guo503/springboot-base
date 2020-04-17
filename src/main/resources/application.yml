@@ -1,43 +1,3 @@
-server:
-  port: 8088
-  context-path: /base
-spring:
-  application:
-    name: springboot-base
-  datasource:
-    name: test
-    url: jdbc:mysql://115.29.231.136:3306/tsyj?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 503178@Gs
-    # 使用druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    tomcat:
-      max-active: 20
-      initial-size: 2
-      max-wait: 60000
-      min-idle: 1
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1
-      test-while-idle: true
-      test-on-borrow: false
-      testOnReturn: false
-
-  redis:
-    # Redis数据库索引（默认为0）
-    database: 0
-    # Redis服务器地址
-    host: 115.29.231.136
-    # Redis服务器连接端口
-    port: 6379
-    # Redis服务器连接密码（默认为空）
-    password: gs503178
-    timeout: 5000
-
-mybatis:
-  mapper-locations: classpath*:mapper/*.xml
-
 binlog:
   mysql:
     hosts:
@@ -55,6 +15,5 @@ app:
     enabled: true # 是否开启 Apollo 配置预加载功能。默认为 false。
     eagerLoad:
       enable: true # 是否开启 Apollo 支持日志级别的加载时机。默认为 false。
-    namespaces: application,base-jdbc,base-redis,base-application # 使用的 Apollo 的命名空间，默认为 application。
 env: dev
 

@@ -1,9 +1,13 @@
 package com.tsyj.utils;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.PropertyFilter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -25,8 +29,7 @@ public class JsonUtils {
      */
     public static String objectToJson(Object data) {
         try {
-            String string = MAPPER.writeValueAsString(data);
-            return string;
+            return MAPPER.writeValueAsString(data);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -42,8 +45,7 @@ public class JsonUtils {
      */
     public static <T> T jsonToPojo(String jsonData, Class<T> beanType) {
         try {
-            T t = MAPPER.readValue(jsonData, beanType);
-            return t;
+            return MAPPER.readValue(jsonData, beanType);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,12 +64,30 @@ public class JsonUtils {
     public static <T> List<T> jsonToList(String jsonData, Class<T> beanType) {
         JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
         try {
-            List<T> list = MAPPER.readValue(jsonData, javaType);
-            return list;
+            return MAPPER.readValue(jsonData, javaType);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    /**
+     * 对象过滤属性转json串
+     *
+     * @param o 对象
+     * @param excludeList 需要过滤的属性列表
+     * @return
+     * @author guos
+     * @date 2020/4/17 16:22
+     **/
+    public static String objToJsonStringWithExcludeName(Object o, List<String> excludeList) {
+        if (StringUtils.isEmpty(o)) {
+            return null;
+        }
+        if (CollectionUtils.isEmpty(excludeList)) {
+            return JSON.toJSONString(o);
+        }
+        PropertyFilter filter = (o12, s, o1) -> !excludeList.contains(s);
+        return JSON.toJSONString(o, filter);
     }
 }

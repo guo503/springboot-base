@@ -56,7 +56,7 @@ public class MyLogConfigurator implements ApplicationListener<ApplicationReadyEv
         if (config == null) {
             return;
         }
-        String content = config.getProperty(_CONTENT, null);
+       String content = config.getProperty(_CONTENT, null);
         if (content == null) {
             return;
         }
