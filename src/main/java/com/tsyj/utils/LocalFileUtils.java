@@ -2,10 +2,12 @@ package com.tsyj.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -22,11 +24,9 @@ public class LocalFileUtils {
 
 
     public static void main(String[] args) {
-        //String filePath = "d:/test.Java";
-        // LocalFileUtils.modifyLine(filePath, "package", "package com.tsyj.test;\n\n\nimport java.util.*;");
-        //LocalFileUtils.modifyLine(filePath, "}", "\tappend xxx\n}");
-
-        System.out.println(getPath("com.tsyj.common.service"));
+        //String filePath = generateBmp("https://oss.pdabc.com/20181211/b44dbdf7-30aa-41d0-b2ae-4f4a20ed68b2.png");
+        //System.out.println("filePath = " + filePath);
+        deleteFile("D:\\cc85f18cbf874d55b0e0baae2b2c6a28.bmp");
     }
 
 
@@ -146,7 +146,7 @@ public class LocalFileUtils {
     public static void doExport(String fileUrl, HttpServletRequest request, HttpServletResponse response) {
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;
-        String fileName = "学生作业-" + DateUtils.formatDate(new Date(), 0)+".xlsx";
+        String fileName = "学生作业-" + DateUtils.formatDate(new Date(), 0) + ".xlsx";
         try {
             URL url = new URL(fileUrl);
             InputStream inputStream = url.openStream();
@@ -186,4 +186,40 @@ public class LocalFileUtils {
         }
     }
 
+
+    public static void deleteFile(String filePath) {
+        try {
+            Files.deleteIfExists(Paths.get(filePath));
+        } catch (Exception e) {
+            logger.info("文件删除失败,filePath = {},[error] = {}", filePath, ExceptionUtils.getExceptionMsg(e));
+        }
+    }
+
+
+    /**
+     * 生成位图
+     *
+     * @param url 位图路径
+     * @return float
+     * @author guos
+     * @date 2019/10/9 10:36
+     **/
+    public static String generateBmp(String url) {
+        if (StringUtils.isEmpty(url)) {
+            return "";
+        }
+        logger.info("[url] = {}", url);
+        String filePath = getPath();
+        try {
+            BitMapUtil.image2RGBBmp(new URL(url), filePath);
+        } catch (MalformedURLException e) {
+            logger.info("图片转rgb位图出错,异常信息[error] = {}", ExceptionUtils.getExceptionMsg(e));
+            throw new RuntimeException("图片转rgb位图出错");
+        }
+        return filePath;
+    }
+
+    private static String getPath() {
+        return "D:\\" + StrUtils.uuid() + ".bmp";
+    }
 }

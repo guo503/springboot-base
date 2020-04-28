@@ -1,9 +1,5 @@
 package com.tsyj.test;
 
-import com.google.common.collect.Lists;
-import com.tsyj.model.User;
-import com.tsyj.utils.JsonUtils;
-
 /**
  * @description:
  * @author: guos
@@ -12,9 +8,12 @@ import com.tsyj.utils.JsonUtils;
 public class PoTest {
 
     public static void main(String[] args) {
-        User u1 = new User();
+     /*   User u1 = new User();
         u1.setName("u1");
         u1.setPhone("111");
-        System.out.println(JsonUtils.objToJsonStringWithExcludeName(u1, Lists.newArrayList("phone", "row", "start", "version")));
+        System.out.println(JsonUtils.objToJsonStringWithExcludeName(u1, Lists.newArrayList("phone", "row", "start", "version")));*/
+
+        Integer a = 200, b = 300;
+        System.out.println(b>a);
     }
 }
