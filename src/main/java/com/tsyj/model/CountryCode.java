@@ -1,15 +1,16 @@
 package com.tsyj.model;
 
 import com.tsyj.page.Page;
-import java.io.Serializable;
 import lombok.Data;
 import mybatis.core.annotation.Id;
 import mybatis.core.annotation.Table;
 
+import java.io.Serializable;
+
 /**
 * 国际电话号码区号实体类
 * @author guos
-* @date 2020/04/28 18:24
+* @date 2020/05/20 13:49
 */
 @Table(name = "country_code")
 @Data
@@ -18,7 +19,7 @@ public class CountryCode extends Page implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 152623611295891L;
+    private static final long serialVersionUID = 548378845538523L;
 
     /**
      * 

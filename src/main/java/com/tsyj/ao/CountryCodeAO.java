@@ -1,4 +1,4 @@
-package com.tsyj.vo;
+package com.tsyj.ao;
 
 import com.tsyj.model.CountryCode;
 import java.io.Serializable;
@@ -10,10 +10,10 @@ import lombok.Data;
 * @date 2020/05/20 13:49
 */
 @Data
-public class CountryCodeVO extends CountryCode implements Serializable {
+public class CountryCodeAO extends CountryCode implements Serializable {
     
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 917568668229464L;
+    private static final long serialVersionUID = 572883222885524L;
 }

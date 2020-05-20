@@ -1,5 +1,7 @@
 package com.tsyj.test;
 
+import java.util.Objects;
+
 /**
  * @description:
  * @author: guos
@@ -14,6 +16,8 @@ public class PoTest {
         System.out.println(JsonUtils.objToJsonStringWithExcludeName(u1, Lists.newArrayList("phone", "row", "start", "version")));*/
 
         Integer a = 200, b = 300;
-        System.out.println(b>a);
+        Byte x = 3;
+        System.out.println(Objects.equals(x.intValue(), 3));
+        System.out.println(x == 3);
     }
 }

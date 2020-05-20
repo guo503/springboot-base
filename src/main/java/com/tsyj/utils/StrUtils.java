@@ -371,7 +371,7 @@ public class StrUtils {
     public static void main(String[] args) {
 
         //System.out.println(picName("https://pdabc-dev.oss-cn-hangzhou.aliyuncs.com/huiben/L1_001_Farm_Animals_01.jpg"));
-
+        System.out.println(StrUtils.class.getName());
         System.out.println(getRandomStr(10));
     }
 }

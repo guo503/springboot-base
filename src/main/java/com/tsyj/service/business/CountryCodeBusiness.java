@@ -1,16 +1,17 @@
-package com.tsyj.service;
+package com.tsyj.service.business;
 
 import com.tsyj.model.CountryCode;
 import java.util.*;
 import java.util.Map;
 import mybatis.core.entity.Condition;
+import mybatis.core.entity.LimitCondition;
 
 /**
 * 国际电话号码区号service类
 * @author guos
 * @date 2020/05/20 13:49
 */
-public interface CountryCodeService {
+public interface CountryCodeBusiness {
     
     /**
     * 查询国际电话号码区号

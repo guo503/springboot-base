@@ -1,5 +1,6 @@
 package com.tsyj.controller;
 
+import com.tsyj.ao.CountryCodeAO;
 import com.tsyj.business.CountryCodeBusiness;
 import com.tsyj.response.Result;
 import com.tsyj.vo.CountryCodeVO;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
 * 国际电话号码区号api类
 * @author guos
-* @date 2020/04/28 18:24
+* @date 2020/05/20 13:49
 */
 @CrossOrigin
 @RestController
@@ -25,7 +26,7 @@ public class CountryCodeController {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/04/28 18:24
+    * @date 2020/05/20 13:49
     * @return Result<CountryCodeVO>
     */
     @GetMapping("/{id}")
@@ -36,41 +37,41 @@ public class CountryCodeController {
     
     /**
     * 新增国际电话号码区号
-    * @param countryCodeVO countryCodeVO
+    * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/04/28 18:24
+    * @date 2020/05/20 13:49
     * @return Result<Object>
     */
     @PostMapping
-    public Result<Object> save(@RequestBody CountryCodeVO countryCodeVO) {
-        return countryCodeBusiness.save(countryCodeVO) > 0 ? Result.success("国际电话号码区号添加成功"): Result.fail("国际电话号码区号添加失败");
+    public Result<Object> save(@RequestBody CountryCodeAO countryCodeAO) {
+        return countryCodeBusiness.save(countryCodeAO) > 0 ? Result.success("国际电话号码区号添加成功"): Result.fail("国际电话号码区号添加失败");
     }
 
     
     /**
     * 更新国际电话号码区号
     * @param id id
-    * @param countryCodeVO countryCodeVO
+    * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/04/28 18:24
+    * @date 2020/05/20 13:49
     * @return Result<Object>
     */
     @PutMapping("/{id}")
-    public Result<Object> update(@PathVariable("id") Integer id, @RequestBody CountryCodeVO countryCodeVO) {
-        countryCodeVO.setId(id);
-        return countryCodeBusiness.update(countryCodeVO) > 0 ? Result.success("国际电话号码区号更新成功"): Result.fail("国际电话号码区号更新失败");
+    public Result<Object> update(@PathVariable("id") Integer id, @RequestBody CountryCodeAO countryCodeAO) {
+        countryCodeAO.setId(id);
+        return countryCodeBusiness.update(countryCodeAO) > 0 ? Result.success("国际电话号码区号更新成功"): Result.fail("国际电话号码区号更新失败");
     }
 
     
     /**
     * 根据条件类查询国际电话号码区号列表
-    * @param countryCodeVO countryCodeVO
+    * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/04/28 18:24
+    * @date 2020/05/20 13:49
     * @return Result<List<CountryCodeVO>>
     */
     @GetMapping
-    public Result<List<CountryCodeVO>> listByCondition(CountryCodeVO countryCodeVO) {
-        return countryCodeBusiness.listByCondition(countryCodeVO);
+    public Result<List<CountryCodeVO>> listByCondition(CountryCodeAO countryCodeAO) {
+        return countryCodeBusiness.listByCondition(countryCodeAO);
     }
 }

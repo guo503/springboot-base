@@ -1,13 +1,19 @@
-package com.tsyj.service.impl;
+package com.tsyj.service.business.impl;
 
+import com.google.common.collect.*;
+import com.tsyj.consts.UserConst;
+import com.tsyj.mapper.CountryCodeMapper;
 import com.tsyj.model.CountryCode;
-import com.tsyj.service.CountryCodeService;
+import com.tsyj.page.Page;
 import com.tsyj.service.business.CountryCodeBusiness;
 import java.util.*;
+import java.util.stream.Collectors;
 import mybatis.core.entity.Condition;
+import mybatis.core.entity.LimitCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.*;
 import org.springframework.util.Assert;
 
 /**
@@ -16,10 +22,10 @@ import org.springframework.util.Assert;
 * @date 2020/05/20 13:49
 */
 @Service
-public class CountryCodeServiceImpl implements CountryCodeService {
+public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     
     @Autowired
-    private CountryCodeBusiness countryCodeBusiness;
+    private CountryCodeMapper countryCodeMapper;
 
     
     /**
@@ -32,7 +38,7 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Override
     public CountryCode get(Integer id) {
         Assert.notNull(id,"id不能为空");
-        return countryCodeBusiness.get(id);
+        return countryCodeMapper.getx(id);
     }
 
     
@@ -46,7 +52,7 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Override
     public CountryCode getOne(CountryCode countryCode) {
         Assert.notNull(countryCode,"countryCode不能为空");
-        return countryCodeBusiness.getOne(countryCode);
+        return countryCodeMapper.getOnex(countryCode);
     }
 
     
@@ -59,7 +65,8 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     */
     @Override
     public int save(CountryCode countryCode) {
-        return countryCodeBusiness.save(countryCode);
+        Assert.notNull(countryCode,"countryCode不能为空");
+        return countryCodeMapper.savex(countryCode);
     }
 
     
@@ -73,7 +80,8 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Transactional
     @Override
     public CountryCode saveAndGet(CountryCode countryCode) {
-        return countryCodeBusiness.saveAndGet(countryCode);
+        this.save(countryCode);
+        return this.get(countryCode.getId());
     }
 
     
@@ -86,7 +94,8 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     */
     @Override
     public int update(CountryCode countryCode) {
-        return countryCodeBusiness.update(countryCode);
+        Assert.notNull(countryCode,"countryCode不能为空");
+        return countryCodeMapper.updatex(countryCode);
     }
 
     
@@ -99,8 +108,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     */
     @Override
     public List<CountryCode> listByIds(List<Integer> ids) {
-        Assert.notNull(ids,"ids不能为空");
-        return countryCodeBusiness.listByIds(ids);
+        if (CollectionUtils.isEmpty(ids)) {
+            return Lists.newArrayList();
+        }
+        Condition<CountryCode> countryCodeCond = new Condition<>();
+        countryCodeCond.createCriteria().andIn(CountryCode.ID, ids);
+        countryCodeCond.limit(Page.getMaxRow());
+        return this.listByCondition(countryCodeCond);
     }
 
     
@@ -114,7 +128,7 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Override
     public List<CountryCode> list(CountryCode countryCode) {
         Assert.notNull(countryCode,"countryCode不能为空");
-        return countryCodeBusiness.list(countryCode);
+        return countryCodeMapper.listLimitx(countryCode, new LimitCondition(countryCode.getStart(), countryCode.getRow()));
     }
 
     
@@ -128,7 +142,7 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Override
     public int count(CountryCode countryCode) {
         Assert.notNull(countryCode,"countryCode不能为空");
-        return countryCodeBusiness.count(countryCode);
+        return countryCodeMapper.countx(countryCode);
     }
 
     
@@ -142,7 +156,7 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Override
     public List<CountryCode> listByCondition(Condition<CountryCode> countryCodeCond) {
         Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.listByCondition(countryCodeCond);
+        return countryCodeMapper.listByConditionx(countryCodeCond);
     }
 
     
@@ -156,7 +170,7 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Override
     public int countByCondition(Condition<CountryCode> countryCodeCond) {
         Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.countByCondition(countryCodeCond);
+        return countryCodeMapper.countByConditionx(countryCodeCond);
     }
 
     
@@ -169,8 +183,8 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     */
     @Override
     public List<Integer> listId(Condition<CountryCode> countryCodeCond) {
-        Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.listId(countryCodeCond);
+        List<CountryCode> list = this.listByCondition(countryCodeCond);
+        return list.stream().map(CountryCode::getId).distinct().collect(Collectors.toList());
     }
 
     
@@ -183,7 +197,8 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     */
     @Override
     public Map<Integer, CountryCode> map(Condition<CountryCode> countryCodeCond) {
-        return countryCodeBusiness.map(countryCodeCond);
+        List<CountryCode> countryCodeList = this.listByCondition(countryCodeCond);
+        return countryCodeList.stream().collect(Collectors.toMap(CountryCode::getId,countryCode -> countryCode, (k1, k2) -> k2));
     }
 
     
@@ -196,7 +211,8 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     */
     @Override
     public Map<Integer, CountryCode> mapByIds(List<Integer> ids) {
-        return countryCodeBusiness.mapByIds(ids);
+        List<CountryCode> countryCodeList = this.listByIds(ids);
+        return countryCodeList.stream().collect(Collectors.toMap(CountryCode::getId,countryCode -> countryCode, (k1, k2) -> k2));
     }
 
     
@@ -211,6 +227,9 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     @Override
     public List<CountryCode> batchList(int gtId, Condition<CountryCode> countryCodeCond) {
         Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.batchList(gtId, countryCodeCond);
+        countryCodeCond.limit(1,Page.getMaxRow() - 1);
+        countryCodeCond.setOrderBy(CountryCode.ID);
+        countryCodeCond.andCriteria().andGreaterThan(CountryCode.ID, gtId);
+        return this.listByCondition(countryCodeCond);
     }
 }
