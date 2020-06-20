@@ -4,14 +4,15 @@ import com.tsyj.ao.CountryCodeAO;
 import com.tsyj.business.CountryCodeBusiness;
 import com.tsyj.response.Result;
 import com.tsyj.vo.CountryCodeVO;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
 * 国际电话号码区号api类
 * @author guos
-* @date 2020/05/20 13:49
+* @date 2020/06/20 15:12
 */
 @CrossOrigin
 @RestController
@@ -26,7 +27,7 @@ public class CountryCodeController {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/05/20 13:49
+    * @date 2020/06/20 15:12
     * @return Result<CountryCodeVO>
     */
     @GetMapping("/{id}")
@@ -39,7 +40,7 @@ public class CountryCodeController {
     * 新增国际电话号码区号
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/05/20 13:49
+    * @date 2020/06/20 15:12
     * @return Result<Object>
     */
     @PostMapping
@@ -53,7 +54,7 @@ public class CountryCodeController {
     * @param id id
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/05/20 13:49
+    * @date 2020/06/20 15:12
     * @return Result<Object>
     */
     @PutMapping("/{id}")
@@ -67,7 +68,7 @@ public class CountryCodeController {
     * 根据条件类查询国际电话号码区号列表
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/05/20 13:49
+    * @date 2020/06/20 15:12
     * @return Result<List<CountryCodeVO>>
     */
     @GetMapping
