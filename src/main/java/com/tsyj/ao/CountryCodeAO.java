@@ -1,13 +1,14 @@
 package com.tsyj.ao;
 
 import com.tsyj.model.CountryCode;
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
 * 国际电话号码区号实体类
 * @author guos
-* @date 2020/06/20 15:12
+* @date 2020/07/01 11:32
 */
 @Data
 public class CountryCodeAO extends CountryCode implements Serializable {
@@ -15,5 +16,5 @@ public class CountryCodeAO extends CountryCode implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 593274645293418L;
+    private static final long serialVersionUID = 113397563344737L;
 }

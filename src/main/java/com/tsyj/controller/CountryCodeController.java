@@ -12,7 +12,7 @@ import java.util.List;
 /**
 * 国际电话号码区号api类
 * @author guos
-* @date 2020/06/20 15:12
+* @date 2020/07/01 11:32
 */
 @CrossOrigin
 @RestController
@@ -27,7 +27,7 @@ public class CountryCodeController {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return Result<CountryCodeVO>
     */
     @GetMapping("/{id}")
@@ -40,7 +40,7 @@ public class CountryCodeController {
     * 新增国际电话号码区号
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return Result<Object>
     */
     @PostMapping
@@ -54,7 +54,7 @@ public class CountryCodeController {
     * @param id id
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return Result<Object>
     */
     @PutMapping("/{id}")
@@ -68,7 +68,7 @@ public class CountryCodeController {
     * 根据条件类查询国际电话号码区号列表
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return Result<List<CountryCodeVO>>
     */
     @GetMapping

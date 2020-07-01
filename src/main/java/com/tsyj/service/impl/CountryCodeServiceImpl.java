@@ -2,37 +2,39 @@ package com.tsyj.service.impl;
 
 import com.tsyj.model.CountryCode;
 import com.tsyj.service.CountryCodeService;
-import com.tsyj.service.business.CountryCodeBusiness;
-import java.util.*;
+import com.tsyj.service.manage.CountryCodeManage;
 import mybatis.core.entity.Condition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.List;
+import java.util.Map;
+
 /**
 * 国际电话号码区号service实现类
 * @author guos
-* @date 2020/06/20 15:12
+* @date 2020/07/01 11:32
 */
 @Service
 public class CountryCodeServiceImpl implements CountryCodeService {
     
     @Autowired
-    private CountryCodeBusiness countryCodeBusiness;
+    private CountryCodeManage countryCodeManage;
 
     
     /**
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return CountryCode
     */
     @Override
     public CountryCode get(Integer id) {
         Assert.notNull(id,"id不能为空");
-        return countryCodeBusiness.get(id);
+        return countryCodeManage.get(id);
     }
 
     
@@ -40,13 +42,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 根据countryCode查询国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return CountryCode
     */
     @Override
     public CountryCode getOne(CountryCode countryCode) {
         Assert.notNull(countryCode,"countryCode不能为空");
-        return countryCodeBusiness.getOne(countryCode);
+        return countryCodeManage.getOne(countryCode);
     }
 
     
@@ -54,12 +56,12 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 新增国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return int
     */
     @Override
     public int save(CountryCode countryCode) {
-        return countryCodeBusiness.save(countryCode);
+        return countryCodeManage.save(countryCode);
     }
 
     
@@ -67,13 +69,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 新增并返回国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return CountryCode
     */
     @Transactional
     @Override
     public CountryCode saveAndGet(CountryCode countryCode) {
-        return countryCodeBusiness.saveAndGet(countryCode);
+        return countryCodeManage.saveAndGet(countryCode);
     }
 
     
@@ -81,12 +83,12 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 更新国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return int
     */
     @Override
     public int update(CountryCode countryCode) {
-        return countryCodeBusiness.update(countryCode);
+        return countryCodeManage.update(countryCode);
     }
 
     
@@ -94,13 +96,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 
     * @param ids ids
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return List<CountryCode>
     */
     @Override
     public List<CountryCode> listByIds(List<Integer> ids) {
         Assert.notNull(ids,"ids不能为空");
-        return countryCodeBusiness.listByIds(ids);
+        return countryCodeManage.listByIds(ids);
     }
 
     
@@ -108,13 +110,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 根据po查询国际电话号码区号列表
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return List<CountryCode>
     */
     @Override
     public List<CountryCode> list(CountryCode countryCode) {
         Assert.notNull(countryCode,"countryCode不能为空");
-        return countryCodeBusiness.list(countryCode);
+        return countryCodeManage.list(countryCode);
     }
 
     
@@ -122,13 +124,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 根据po查询国际电话号码区号总数
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return int
     */
     @Override
     public int count(CountryCode countryCode) {
         Assert.notNull(countryCode,"countryCode不能为空");
-        return countryCodeBusiness.count(countryCode);
+        return countryCodeManage.count(countryCode);
     }
 
     
@@ -136,13 +138,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 根据条件类查询国际电话号码区号列表
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return List<CountryCode>
     */
     @Override
     public List<CountryCode> listByCondition(Condition<CountryCode> countryCodeCond) {
         Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.listByCondition(countryCodeCond);
+        return countryCodeManage.listByCondition(countryCodeCond);
     }
 
     
@@ -150,13 +152,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 根据条件类查询国际电话号码区号总数
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return int
     */
     @Override
     public int countByCondition(Condition<CountryCode> countryCodeCond) {
         Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.countByCondition(countryCodeCond);
+        return countryCodeManage.countByCondition(countryCodeCond);
     }
 
     
@@ -164,13 +166,13 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return List<Integer>
     */
     @Override
     public List<Integer> listId(Condition<CountryCode> countryCodeCond) {
         Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.listId(countryCodeCond);
+        return countryCodeManage.listId(countryCodeCond);
     }
 
     
@@ -178,12 +180,12 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 将符合查询条件的国际电话号码区号列表转map
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return Map<Integer, CountryCode>
     */
     @Override
     public Map<Integer, CountryCode> map(Condition<CountryCode> countryCodeCond) {
-        return countryCodeBusiness.map(countryCodeCond);
+        return countryCodeManage.map(countryCodeCond);
     }
 
     
@@ -191,12 +193,12 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * 将符合查询条件的国际电话号码区号列表转map
     * @param ids ids
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return Map<Integer, CountryCode>
     */
     @Override
     public Map<Integer, CountryCode> mapByIds(List<Integer> ids) {
-        return countryCodeBusiness.mapByIds(ids);
+        return countryCodeManage.mapByIds(ids);
     }
 
     
@@ -205,12 +207,12 @@ public class CountryCodeServiceImpl implements CountryCodeService {
     * @param gtId gtId
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/06/20 15:12
+    * @date 2020/07/01 11:32
     * @return List<CountryCode>
     */
     @Override
     public List<CountryCode> batchList(int gtId, Condition<CountryCode> countryCodeCond) {
         Assert.notNull(countryCodeCond,"countryCodeCond不能为空");
-        return countryCodeBusiness.batchList(gtId, countryCodeCond);
+        return countryCodeManage.batchList(gtId, countryCodeCond);
     }
 }

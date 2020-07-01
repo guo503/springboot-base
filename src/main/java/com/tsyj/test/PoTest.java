@@ -1,6 +1,6 @@
 package com.tsyj.test;
 
-import java.util.Objects;
+import java.math.BigDecimal;
 
 /**
  * @description:
@@ -10,14 +10,13 @@ import java.util.Objects;
 public class PoTest {
 
     public static void main(String[] args) {
-     /*   User u1 = new User();
-        u1.setName("u1");
-        u1.setPhone("111");
-        System.out.println(JsonUtils.objToJsonStringWithExcludeName(u1, Lists.newArrayList("phone", "row", "start", "version")));*/
+        BigDecimal var = new BigDecimal("10");
+        System.out.println(reset(var));
+    }
 
-        Integer a = 200, b = 300;
-        Byte x = 3;
-        System.out.println(Objects.equals(x.intValue(), 3));
-        System.out.println(x == 3);
+    public static BigDecimal reset(BigDecimal var) {
+        System.out.println(var.add(BigDecimal.ONE));
+        var = var.add(BigDecimal.ONE);
+        return var;
     }
 }

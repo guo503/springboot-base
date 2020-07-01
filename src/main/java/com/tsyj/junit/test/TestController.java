@@ -1,12 +1,15 @@
 package com.tsyj.junit.test;
 
-import com.tsyj.model.User;
-import com.tsyj.service.UserService;
+import com.google.common.collect.Lists;
+import com.tsyj.model.CountryCode;
+import com.tsyj.service.manage.CountryCodeManage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @author: guos
@@ -18,14 +21,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class TestController {
 
     @Autowired
-    private UserService  userService;
+    private CountryCodeManage countryCodeManage;
 
 
     @Test
     public void getUser(){
-        User user = userService.get(1);
-        if(user!=null){
-            System.out.println(user.getName());
-        }
+        List<CountryCode> countryCodeList = countryCodeManage.listByIds(Lists.newArrayList(214, 215, 216));
+        countryCodeList.forEach(System.out::println);
     }
 }
