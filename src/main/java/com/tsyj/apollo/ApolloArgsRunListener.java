@@ -41,25 +41,30 @@ public class ApolloArgsRunListener implements SpringApplicationRunListener, Orde
             if (executed) {
                 return;
             }
-
             // 先从System Property（服务器上部署）
             Properties properties = System.getProperties();
             String appId = properties.getProperty("app.id");
             String env = properties.getProperty("env");
-            if (appId == null || env == null) {
-                // 再从application.yml（本地开发用）
-                try {
-                    JSONObject yml = this.readYml();
-                    JSONObject app = yml.getJSONObject("app");
-                    appId = appId == null ? app.getString("id") : appId;
-                    env = env == null ? app.getString("env") : env;
-                    System.setProperty("app.id", appId);
-                    System.setProperty("env", env);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("application.yml read error");
-                }
+            JSONObject yml;
+            // 再从application.yml（本地开发用）
+            try {
+                yml = this.readYml();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("application.yml read error");
             }
+            if (appId == null) {
+                JSONObject app = yml.getJSONObject("app");
+                appId = app.getString("id");
+                System.setProperty("app.id", appId);
+            }
+            if (env == null) {
+                System.setProperty("env", yml.getString("env"));
+            }
+            //配置文件缓存
+            JSONObject apollo = yml.getJSONObject("apollo");
+            String cacheDir = apollo.getString("cacheDir");
+            System.setProperty("apollo.cacheDir", cacheDir);
             init();
             executed = true;
         }
@@ -71,19 +76,24 @@ public class ApolloArgsRunListener implements SpringApplicationRunListener, Orde
     private void init() {
         System.out.println("----------->apollo 预读取");
         Config c = ConfigService.getAppConfig();
-        String namespaces = c.getProperty("namespaces",null);
+        String namespaces = c.getProperty("namespaces", null);
         ConfigContext.setApplication(namespaces.split(","));
     }
 
 
-    private JSONObject readYml() throws IOException {
+    private Object loadYml() throws IOException {
         String location = "/application.yml";
         Yaml yaml = new Yaml();
         //MailConfig 这个是这个主函数所在的类的类名
         InputStream input = new ClassPathResource(location).getInputStream();
-        //加载流,获取yaml文件中的配置数据，然后转换为Map，
-        Map content = (Map)yaml.load(input);
-        JSONObject yml=new JSONObject();
+        //加载流,获取yaml文件中的配置数据
+        return yaml.load(input);
+    }
+
+
+    private JSONObject readYml() throws IOException {
+        Map content = (Map) this.loadYml();
+        JSONObject yml = new JSONObject();
         Iterator it = content.keySet().iterator();
         while (it.hasNext()) {
             String key = (String) it.next();

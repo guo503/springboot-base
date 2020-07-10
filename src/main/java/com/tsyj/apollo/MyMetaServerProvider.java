@@ -36,7 +36,7 @@ public class MyMetaServerProvider implements MetaServerProvider {
     public String getMetaServerAddress(Env env) {
         Properties properties = System.getProperties();
         String _env = properties.getProperty("env");
-        String domain = null;
+        String domain;
         if (_env == null || (domain = domains.get(_env.toLowerCase())) == null) {
             // 如果环境非dev,test,pre,prod,返回无效的地址
             return "http://apollo.meta";

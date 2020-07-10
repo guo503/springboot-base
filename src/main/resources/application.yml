@@ -1,4 +1,6 @@
 app:
   id: springboot-base # 使用的 Apollo 的项目（应用）编号
 env: dev
+apollo:
+  cacheDir: D:\Java\apollo\config
 

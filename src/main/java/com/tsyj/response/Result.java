@@ -30,10 +30,6 @@ public class Result<T> implements Serializable {
      * 总数
      */
     private Integer total;
-    /**
-     * 额外数据
-     */
-    private Object attach;
 
     public static <T> Result<T> success() {
         Result<T> result = new Result<T>();
@@ -122,18 +118,10 @@ public class Result<T> implements Serializable {
         this.total = total;
     }
 
-    public Object getAttach() {
-        return attach;
-    }
-
-    public void setAttach(Object attach) {
-        this.attach = attach;
-    }
-
     @Override
     public String toString() {
         return "Result [errorCode=" + errorCode + ", errorMessage=" + errorMessage + ", data=" + data + ", total="
-                + total + ", attach=" + attach + "]";
+                + total + "]";
     }
 
 
