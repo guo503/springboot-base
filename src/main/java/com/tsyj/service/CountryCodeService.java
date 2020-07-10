@@ -1,14 +1,15 @@
 package com.tsyj.service;
 
 import com.tsyj.model.CountryCode;
-import java.util.*;
-import java.util.Map;
 import mybatis.core.entity.Condition;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * 国际电话号码区号service类
 * @author guos
-* @date 2020/07/01 11:32
+* @date 2020/07/10 10:23
 */
 public interface CountryCodeService {
     
@@ -16,7 +17,7 @@ public interface CountryCodeService {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return CountryCode
     */
     CountryCode get(Integer id);
@@ -26,7 +27,7 @@ public interface CountryCodeService {
     * 根据countryCode查询国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return CountryCode
     */
     CountryCode getOne(CountryCode countryCode);
@@ -36,7 +37,7 @@ public interface CountryCodeService {
     * 新增国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return int
     */
     int save(CountryCode countryCode);
@@ -46,7 +47,7 @@ public interface CountryCodeService {
     * 新增并返回国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return CountryCode
     */
     CountryCode saveAndGet(CountryCode countryCode);
@@ -56,7 +57,7 @@ public interface CountryCodeService {
     * 更新国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return int
     */
     int update(CountryCode countryCode);
@@ -66,7 +67,7 @@ public interface CountryCodeService {
     * 
     * @param ids ids
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return List<CountryCode>
     */
     List<CountryCode> listByIds(List<Integer> ids);
@@ -76,7 +77,7 @@ public interface CountryCodeService {
     * 根据po查询国际电话号码区号列表
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return List<CountryCode>
     */
     List<CountryCode> list(CountryCode countryCode);
@@ -86,7 +87,7 @@ public interface CountryCodeService {
     * 根据po查询国际电话号码区号总数
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return int
     */
     int count(CountryCode countryCode);
@@ -96,7 +97,7 @@ public interface CountryCodeService {
     * 根据条件类查询国际电话号码区号列表
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return List<CountryCode>
     */
     List<CountryCode> listByCondition(Condition<CountryCode> countryCodeCond);
@@ -106,7 +107,7 @@ public interface CountryCodeService {
     * 根据条件类查询国际电话号码区号总数
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return int
     */
     int countByCondition(Condition<CountryCode> countryCodeCond);
@@ -116,7 +117,7 @@ public interface CountryCodeService {
     * 
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return List<Integer>
     */
     List<Integer> listId(Condition<CountryCode> countryCodeCond);
@@ -126,7 +127,7 @@ public interface CountryCodeService {
     * 将符合查询条件的国际电话号码区号列表转map
     * @param ids ids
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return Map<Integer, CountryCode>
     */
     Map<Integer, CountryCode> mapByIds(List<Integer> ids);
@@ -136,7 +137,7 @@ public interface CountryCodeService {
     * 将符合查询条件的国际电话号码区号列表转map
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return Map<Integer, CountryCode>
     */
     Map<Integer, CountryCode> map(Condition<CountryCode> countryCodeCond);
@@ -147,7 +148,7 @@ public interface CountryCodeService {
     * @param gtId gtId
     * @param countryCodeCond countryCodeCond
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return List<CountryCode>
     */
     List<CountryCode> batchList(int gtId, Condition<CountryCode> countryCodeCond);

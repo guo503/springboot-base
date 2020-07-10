@@ -10,8 +10,10 @@ import java.math.BigDecimal;
 public class PoTest {
 
     public static void main(String[] args) {
-        BigDecimal var = new BigDecimal("10");
-        System.out.println(reset(var));
+        //BigDecimal var = new BigDecimal("10");
+        //System.out.println(reset(var));
+        String var = "13910";
+        System.out.println(var == "13910");
     }
 
     public static BigDecimal reset(BigDecimal var) {

@@ -38,10 +38,8 @@ public class ModelConvertUtils {
             throw new IllegalArgumentException("list is empty");
         }
         List<T> targetList = new ArrayList<T>();
-
-        list.stream().forEach(e -> {
+        list.forEach(e -> {
             targetList.add(convert(target, e));
-
         });
         return targetList;
     }

@@ -9,16 +9,18 @@ import com.tsyj.service.CountryCodeService;
 import com.tsyj.utils.ModelConvertUtils;
 import com.tsyj.vo.CountryCodeVO;
 import mybatis.core.entity.Condition;
+import mybatis.core.page.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 /**
 * 国际电话号码区号业务类
 * @author guos
-* @date 2020/07/01 11:32
+* @date 2020/07/10 10:23
 */
 @Service
 public class CountryCodeBusinessImpl implements CountryCodeBusiness {
@@ -31,7 +33,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return CountryCodeVO
     */
     @Override
@@ -50,7 +52,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 新增国际电话号码区号
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return int
     */
     @Override
@@ -68,7 +70,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 更新国际电话号码区号
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return int
     */
     @Override
@@ -85,15 +87,17 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     /**
     * 根据条件类查询国际电话号码区号列表
     * @param countryCodeAO countryCodeAO
+    * @param pageNum pageNum
+    * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return Result<List<CountryCodeVO>>
     */
     @Override
-    public Result<List<CountryCodeVO>> listByCondition(CountryCodeAO countryCodeAO) {
+    public Result<List<CountryCodeVO>> listByCondition(CountryCodeAO countryCodeAO, int pageNum, int pageSize) {
         Result<List<CountryCodeVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<CountryCode> countryCodeCond = new Condition<>();
-        countryCodeCond.limit(countryCodeAO.getNum(), countryCodeAO.getRow());
+        countryCodeCond.limit(pageNum, pageSize);
         int count = countryCodeService.countByCondition(countryCodeCond);
         if (count == 0){
             return result;
@@ -107,12 +111,36 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 根据条件类查询国际电话号码区号总数
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/01 11:32
+    * @date 2020/07/10 10:23
     * @return int
     */
     @Override
     public int countByCondition(CountryCodeAO countryCodeAO) {
         Condition<CountryCode> countryCodeCond = new Condition<>();
         return countryCodeService.countByCondition(countryCodeCond);
+    }
+
+    
+    /**
+    * 处理国际电话号码区号分批查询
+    * @param countryCodeAO countryCodeAO
+    * @author guos
+    * @date 2020/07/10 10:23
+    */
+    @Override
+    public void doBatch(CountryCodeAO countryCodeAO) {
+        int maxSize = Page.MAX_SIZE - 1 ;
+        Condition<CountryCode> countryCodeCond = new Condition<>();
+        countryCodeCond.limit(maxSize) ;
+        int size = maxSize ;
+        int gtId = 0;
+        while (size >= maxSize) {
+            List<CountryCode> list = countryCodeService.batchList(gtId,countryCodeCond);
+            if (CollectionUtils.isEmpty(list)) {
+                break;
+            }
+            size = list.size();
+            gtId = list.get(size - 1).getId();
+        }
     }
 }
