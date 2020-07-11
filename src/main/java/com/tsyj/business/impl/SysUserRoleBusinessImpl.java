@@ -1,15 +1,17 @@
 package com.tsyj.business.impl;
 
 import com.google.common.collect.*;
+import com.tsyj.ao.SysUserRoleAO;
 import com.tsyj.business.SysUserRoleBusiness;
 import com.tsyj.model.SysUserRole;
-import com.tsyj.page.Page;
 import com.tsyj.response.Result;
 import com.tsyj.service.SysUserRoleService;
 import com.tsyj.utils.ModelConvertUtils;
 import com.tsyj.vo.SysUserRoleVO;
 import java.util.*;
+import java.util.stream.Collectors;
 import mybatis.core.entity.Condition;
+import mybatis.core.page.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ import org.springframework.util.CollectionUtils;
 /**
 * 用户-角色业务类
 * @author guos
-* @date 2019/10/31 18:20
+* @date 2020/07/11 17:24
 */
 @Service
 public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
@@ -31,7 +33,7 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
     * 查询用户-角色
     * @param id id
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return SysUserRoleVO
     */
     @Override
@@ -48,52 +50,54 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
     
     /**
     * 新增用户-角色
-    * @param sysUserRoleVO sysUserRoleVO
+    * @param sysUserRoleAO sysUserRoleAO
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return int
     */
     @Override
-    public int save(SysUserRoleVO sysUserRoleVO) {
-        if (sysUserRoleVO == null) {
+    public int save(SysUserRoleAO sysUserRoleAO) {
+        if (sysUserRoleAO == null) {
             throw new RuntimeException("用户-角色信息不能为空!");
         }
         SysUserRole sysUserRole = new SysUserRole();
-        BeanUtils.copyProperties(sysUserRoleVO, sysUserRole);
+        BeanUtils.copyProperties(sysUserRoleAO, sysUserRole);
         return sysUserRoleService.save(sysUserRole);
     }
 
     
     /**
     * 更新用户-角色
-    * @param sysUserRoleVO sysUserRoleVO
+    * @param sysUserRoleAO sysUserRoleAO
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return int
     */
     @Override
-    public int update(SysUserRoleVO sysUserRoleVO) {
-        if (sysUserRoleVO == null) {
+    public int update(SysUserRoleAO sysUserRoleAO) {
+        if (sysUserRoleAO == null) {
             throw new RuntimeException("用户-角色信息不能为空!");
         }
         SysUserRole sysUserRole = new SysUserRole();
-        BeanUtils.copyProperties(sysUserRoleVO, sysUserRole);
+        BeanUtils.copyProperties(sysUserRoleAO, sysUserRole);
         return sysUserRoleService.update(sysUserRole);
     }
 
     
     /**
-    * 根据po查询用户-角色列表
-    * @param sysUserRoleVO sysUserRoleVO
+    * 根据条件类查询用户-角色列表
+    * @param sysUserRoleAO sysUserRoleAO
+    * @param pageNum pageNum
+    * @param pageSize pageSize
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return Result<List<SysUserRoleVO>>
     */
     @Override
-    public Result<List<SysUserRoleVO>> list(SysUserRoleVO sysUserRoleVO) {
+    public Result<List<SysUserRoleVO>> listByCondition(SysUserRoleAO sysUserRoleAO, int pageNum, int pageSize) {
         Result<List<SysUserRoleVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<SysUserRole> sysUserRoleCond = new Condition<>();
-        sysUserRoleCond.limit(sysUserRoleVO.getNum(), sysUserRoleVO.getRow());
+        sysUserRoleCond.limit(pageNum, pageSize);
         int count = sysUserRoleService.countByCondition(sysUserRoleCond);
         if (count == 0){
             return result;
@@ -104,14 +108,14 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
 
     
     /**
-    * 根据po查询用户-角色总数
-    * @param sysUserRoleVO sysUserRoleVO
+    * 根据条件类查询用户-角色总数
+    * @param sysUserRoleAO sysUserRoleAO
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return int
     */
     @Override
-    public int count(SysUserRoleVO sysUserRoleVO) {
+    public int countByCondition(SysUserRoleAO sysUserRoleAO) {
         Condition<SysUserRole> sysUserRoleCond = new Condition<>();
         return sysUserRoleService.countByCondition(sysUserRoleCond);
     }
@@ -119,16 +123,18 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
     
     /**
     * 处理用户-角色分批查询
-    * @param sysUserRoleVO sysUserRoleVO
+    * @param sysUserRoleAO sysUserRoleAO
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     */
     @Override
-    public void doBatch(SysUserRoleVO sysUserRoleVO) {
+    public void doBatch(SysUserRoleAO sysUserRoleAO) {
+        int maxSize = Page.MAX_SIZE - 1 ;
         Condition<SysUserRole> sysUserRoleCond = new Condition<>();
-        int size = Page.getMaxRow() - 1 ;
+        sysUserRoleCond.limit(maxSize) ;
+        int size = maxSize ;
         int gtId = 0;
-        while (size >= Page.getMaxRow() - 1) {
+        while (size >= maxSize) {
             List<SysUserRole> list = sysUserRoleService.batchList(gtId,sysUserRoleCond);
             if (CollectionUtils.isEmpty(list)) {
                 break;

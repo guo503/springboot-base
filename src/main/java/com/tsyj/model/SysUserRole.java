@@ -1,6 +1,5 @@
 package com.tsyj.model;
 
-import com.tsyj.page.Page;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -10,16 +9,16 @@ import mybatis.core.annotation.Table;
 /**
 * 用户-角色实体类
 * @author guos
-* @date 2019/10/31 18:20
+* @date 2020/07/11 17:24
 */
 @Table(name = "sys_user_role")
 @Data
-public class SysUserRole extends Page implements Serializable {
+public class SysUserRole implements Serializable {
     
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 924468421922491L;
+    private static final long serialVersionUID = 195797682849723L;
 
     /**
      * 编号

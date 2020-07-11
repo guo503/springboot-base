@@ -1,25 +1,26 @@
 package com.tsyj.business.impl;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.*;
+import com.tsyj.ao.UserAO;
 import com.tsyj.business.UserBusiness;
 import com.tsyj.model.User;
-import com.tsyj.page.Page;
 import com.tsyj.response.Result;
 import com.tsyj.service.UserService;
 import com.tsyj.utils.ModelConvertUtils;
 import com.tsyj.vo.UserVO;
+import java.util.*;
+import java.util.stream.Collectors;
 import mybatis.core.entity.Condition;
+import mybatis.core.page.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.List;
-
 /**
 * 用户业务类
 * @author guos
-* @date 2019/10/26 14:30
+* @date 2020/07/11 17:38
 */
 @Service
 public class UserBusinessImpl implements UserBusiness {
@@ -32,7 +33,7 @@ public class UserBusinessImpl implements UserBusiness {
     * 查询用户
     * @param id id
     * @author guos
-    * @date 2019/10/26 14:30
+    * @date 2020/07/11 17:38
     * @return UserVO
     */
     @Override
@@ -49,52 +50,54 @@ public class UserBusinessImpl implements UserBusiness {
     
     /**
     * 新增用户
-    * @param userVO userVO
+    * @param userAO userAO
     * @author guos
-    * @date 2019/10/26 14:30
+    * @date 2020/07/11 17:38
     * @return int
     */
     @Override
-    public int save(UserVO userVO) {
-        if (userVO == null) {
+    public int save(UserAO userAO) {
+        if (userAO == null) {
             throw new RuntimeException("用户信息不能为空!");
         }
         User user = new User();
-        BeanUtils.copyProperties(userVO, user);
+        BeanUtils.copyProperties(userAO, user);
         return userService.save(user);
     }
 
     
     /**
     * 更新用户
-    * @param userVO userVO
+    * @param userAO userAO
     * @author guos
-    * @date 2019/10/26 14:30
+    * @date 2020/07/11 17:38
     * @return int
     */
     @Override
-    public int update(UserVO userVO) {
-        if (userVO == null) {
+    public int update(UserAO userAO) {
+        if (userAO == null) {
             throw new RuntimeException("用户信息不能为空!");
         }
         User user = new User();
-        BeanUtils.copyProperties(userVO, user);
+        BeanUtils.copyProperties(userAO, user);
         return userService.update(user);
     }
 
     
     /**
-    * 根据po查询用户列表
-    * @param userVO userVO
+    * 根据条件类查询用户列表
+    * @param userAO userAO
+    * @param pageNum pageNum
+    * @param pageSize pageSize
     * @author guos
-    * @date 2019/10/26 14:30
+    * @date 2020/07/11 17:38
     * @return Result<List<UserVO>>
     */
     @Override
-    public Result<List<UserVO>> list(UserVO userVO) {
+    public Result<List<UserVO>> listByCondition(UserAO userAO, int pageNum, int pageSize) {
         Result<List<UserVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<User> userCond = new Condition<>();
-        userCond.limit(userVO.getNum(), userVO.getRow());
+        userCond.limit(pageNum, pageSize);
         int count = userService.countByCondition(userCond);
         if (count == 0){
             return result;
@@ -105,14 +108,14 @@ public class UserBusinessImpl implements UserBusiness {
 
     
     /**
-    * 根据po查询用户总数
-    * @param userVO userVO
+    * 根据条件类查询用户总数
+    * @param userAO userAO
     * @author guos
-    * @date 2019/10/26 14:30
+    * @date 2020/07/11 17:38
     * @return int
     */
     @Override
-    public int count(UserVO userVO) {
+    public int countByCondition(UserAO userAO) {
         Condition<User> userCond = new Condition<>();
         return userService.countByCondition(userCond);
     }
@@ -120,16 +123,18 @@ public class UserBusinessImpl implements UserBusiness {
     
     /**
     * 处理用户分批查询
-    * @param userVO userVO
+    * @param userAO userAO
     * @author guos
-    * @date 2019/10/26 14:30
+    * @date 2020/07/11 17:38
     */
     @Override
-    public void doBatch(UserVO userVO) {
+    public void doBatch(UserAO userAO) {
+        int maxSize = Page.MAX_SIZE - 1 ;
         Condition<User> userCond = new Condition<>();
-        int size = Page.getMaxRow() - 1 ;
+        userCond.limit(maxSize) ;
+        int size = maxSize ;
         int gtId = 0;
-        while (size >= Page.getMaxRow() - 1) {
+        while (size >= maxSize) {
             List<User> list = userService.batchList(gtId,userCond);
             if (CollectionUtils.isEmpty(list)) {
                 break;

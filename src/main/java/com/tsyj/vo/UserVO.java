@@ -7,7 +7,7 @@ import lombok.Data;
 /**
 * 用户实体类
 * @author guos
-* @date 2019/10/26 14:30
+* @date 2020/07/11 17:38
 */
 @Data
 public class UserVO extends User implements Serializable {
@@ -15,5 +15,5 @@ public class UserVO extends User implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 241629713841264L;
+    private static final long serialVersionUID = 473676823696824L;
 }

@@ -1,25 +1,25 @@
 package com.tsyj.model;
 
-import com.tsyj.page.Page;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 import mybatis.core.annotation.Id;
 import mybatis.core.annotation.Table;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
 * 菜单表实体类
 * @author guos
-* @date 2019/10/31 18:20
+* @date 2020/07/11 17:24
 */
 @Table(name = "sys_menu")
 @Data
-public class SysMenu extends Page implements Serializable {
+public class SysMenu implements Serializable {
     
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 891943761756752L;
+    private static final long serialVersionUID = 962315568632894L;
 
     /**
      * 编号

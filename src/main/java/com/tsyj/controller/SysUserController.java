@@ -1,24 +1,22 @@
 package com.tsyj.controller;
 
-import com.tsyj.annotation.NotEmpty;
+import com.tsyj.ao.SysUserAO;
 import com.tsyj.business.SysUserBusiness;
 import com.tsyj.response.Result;
 import com.tsyj.vo.SysUserVO;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import java.util.*;
+import mybatis.spring.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
 * 用户表api类
 * @author guos
-* @date 2019/10/31 18:20
+* @date 2020/07/11 17:24
 */
-@CrossOrigin
 @RestController
 @RequestMapping("/sys-user")
-public class SysUserController {
+public class SysUserController extends BaseController {
     
     @Autowired
     private SysUserBusiness sysUserBusiness;
@@ -28,7 +26,7 @@ public class SysUserController {
     * 查询用户表
     * @param id id
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return Result<SysUserVO>
     */
     @GetMapping("/{id}")
@@ -39,44 +37,41 @@ public class SysUserController {
     
     /**
     * 新增用户表
-    * @param sysUserVO sysUserVO
+    * @param sysUserAO sysUserAO
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return Result<Object>
     */
     @PostMapping
-    @NotEmpty({"loginName","password","name","phone"})
-    public Result<Object> save(@RequestBody SysUserVO sysUserVO) {
-        return sysUserBusiness.save(sysUserVO) > 0 ? Result.success("用户表添加成功"): Result.fail("用户表添加失败");
+    public Result<Object> save(@RequestBody SysUserAO sysUserAO) {
+        return sysUserBusiness.save(sysUserAO) > 0 ? Result.success("用户表添加成功"): Result.fail("用户表添加失败");
     }
 
     
     /**
     * 更新用户表
     * @param id id
-    * @param sysUserVO sysUserVO
+    * @param sysUserAO sysUserAO
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return Result<Object>
     */
     @PutMapping("/{id}")
-    @NotEmpty({"loginName","password","name","phone"})
-    public Result<Object> update(@PathVariable("id") Integer id, @RequestBody SysUserVO sysUserVO) {
-        sysUserVO.setId(id);
-        return sysUserBusiness.update(sysUserVO) > 0 ? Result.success("用户表更新成功"): Result.fail("用户表更新失败");
+    public Result<Object> update(@PathVariable("id") Integer id, @RequestBody SysUserAO sysUserAO) {
+        sysUserAO.setId(id);
+        return sysUserBusiness.update(sysUserAO) > 0 ? Result.success("用户表更新成功"): Result.fail("用户表更新失败");
     }
 
     
     /**
-    * 根据po查询用户表列表
-    * @param sysUserVO sysUserVO
+    * 根据条件类查询用户表列表
+    * @param sysUserAO sysUserAO
     * @author guos
-    * @date 2019/10/31 18:20
+    * @date 2020/07/11 17:24
     * @return Result<List<SysUserVO>>
     */
     @GetMapping
-    @RequiresPermissions("sys:user:view")
-    public Result<List<SysUserVO>> list(SysUserVO sysUserVO) {
-        return sysUserBusiness.list(sysUserVO);
+    public Result<List<SysUserVO>> listByCondition(SysUserAO sysUserAO) {
+        return sysUserBusiness.listByCondition(sysUserAO, this.getPageNum(), this.getPageSize());
     }
 }

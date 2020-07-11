@@ -7,7 +7,7 @@ import lombok.Data;
 /**
 * 角色-菜单实体类
 * @author guos
-* @date 2019/10/31 18:20
+* @date 2020/07/11 17:24
 */
 @Data
 public class SysRoleMenuVO extends SysRoleMenu implements Serializable {
@@ -15,5 +15,5 @@ public class SysRoleMenuVO extends SysRoleMenu implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 936796195285368L;
+    private static final long serialVersionUID = 558811988989311L;
 }

@@ -1,6 +1,6 @@
 package com.tsyj.business.impl;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.*;
 import com.tsyj.ao.CountryCodeAO;
 import com.tsyj.business.CountryCodeBusiness;
 import com.tsyj.model.CountryCode;
@@ -8,6 +8,8 @@ import com.tsyj.response.Result;
 import com.tsyj.service.CountryCodeService;
 import com.tsyj.utils.ModelConvertUtils;
 import com.tsyj.vo.CountryCodeVO;
+import java.util.*;
+import java.util.stream.Collectors;
 import mybatis.core.entity.Condition;
 import mybatis.core.page.Page;
 import org.springframework.beans.BeanUtils;
@@ -15,12 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.List;
-
 /**
 * 国际电话号码区号业务类
 * @author guos
-* @date 2020/07/11 16:56
+* @date 2020/07/11 17:37
 */
 @Service
 public class CountryCodeBusinessImpl implements CountryCodeBusiness {
@@ -33,7 +33,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/07/11 16:56
+    * @date 2020/07/11 17:37
     * @return CountryCodeVO
     */
     @Override
@@ -52,7 +52,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 新增国际电话号码区号
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/11 16:56
+    * @date 2020/07/11 17:37
     * @return int
     */
     @Override
@@ -70,7 +70,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 更新国际电话号码区号
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/11 16:56
+    * @date 2020/07/11 17:37
     * @return int
     */
     @Override
@@ -90,7 +90,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 16:56
+    * @date 2020/07/11 17:37
     * @return Result<List<CountryCodeVO>>
     */
     @Override
@@ -111,7 +111,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 根据条件类查询国际电话号码区号总数
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/11 16:56
+    * @date 2020/07/11 17:37
     * @return int
     */
     @Override
@@ -125,7 +125,7 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 处理国际电话号码区号分批查询
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/11 16:56
+    * @date 2020/07/11 17:37
     */
     @Override
     public void doBatch(CountryCodeAO countryCodeAO) {
