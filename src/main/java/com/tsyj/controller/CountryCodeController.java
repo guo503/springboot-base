@@ -4,16 +4,15 @@ import com.tsyj.ao.CountryCodeAO;
 import com.tsyj.business.CountryCodeBusiness;
 import com.tsyj.response.Result;
 import com.tsyj.vo.CountryCodeVO;
+import java.util.*;
 import mybatis.spring.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
 * 国际电话号码区号api类
 * @author guos
-* @date 2020/07/10 10:23
+* @date 2020/07/11 16:56
 */
 @RestController
 @RequestMapping("/country-code")
@@ -27,7 +26,7 @@ public class CountryCodeController extends BaseController {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/07/10 10:23
+    * @date 2020/07/11 16:56
     * @return Result<CountryCodeVO>
     */
     @GetMapping("/{id}")
@@ -40,7 +39,7 @@ public class CountryCodeController extends BaseController {
     * 新增国际电话号码区号
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/10 10:23
+    * @date 2020/07/11 16:56
     * @return Result<Object>
     */
     @PostMapping
@@ -54,7 +53,7 @@ public class CountryCodeController extends BaseController {
     * @param id id
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/10 10:23
+    * @date 2020/07/11 16:56
     * @return Result<Object>
     */
     @PutMapping("/{id}")
@@ -68,7 +67,7 @@ public class CountryCodeController extends BaseController {
     * 根据条件类查询国际电话号码区号列表
     * @param countryCodeAO countryCodeAO
     * @author guos
-    * @date 2020/07/10 10:23
+    * @date 2020/07/11 16:56
     * @return Result<List<CountryCodeVO>>
     */
     @GetMapping
