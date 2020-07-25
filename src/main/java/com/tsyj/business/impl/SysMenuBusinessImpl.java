@@ -1,15 +1,13 @@
 package com.tsyj.business.impl;
 
-import com.google.common.collect.*;
-import com.tsyj.ao.SysMenuAO;
+import com.google.common.collect.Lists;
 import com.tsyj.business.SysMenuBusiness;
 import com.tsyj.model.SysMenu;
+import com.tsyj.query.SysMenuQuery;
 import com.tsyj.response.Result;
 import com.tsyj.service.SysMenuService;
 import com.tsyj.utils.ModelConvertUtils;
 import com.tsyj.vo.SysMenuVO;
-import java.util.*;
-import java.util.stream.Collectors;
 import mybatis.core.entity.Condition;
 import mybatis.core.page.Page;
 import org.springframework.beans.BeanUtils;
@@ -17,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.List;
+
 /**
 * 菜单表业务类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Service
 public class SysMenuBusinessImpl implements SysMenuBusiness {
@@ -33,7 +33,7 @@ public class SysMenuBusinessImpl implements SysMenuBusiness {
     * 查询菜单表
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return SysMenuVO
     */
     @Override
@@ -50,51 +50,47 @@ public class SysMenuBusinessImpl implements SysMenuBusiness {
     
     /**
     * 新增菜单表
-    * @param sysMenuAO sysMenuAO
+    * @param sysMenu sysMenu
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int save(SysMenuAO sysMenuAO) {
-        if (sysMenuAO == null) {
+    public int save(SysMenu sysMenu) {
+        if (sysMenu == null) {
             throw new RuntimeException("菜单表信息不能为空!");
         }
-        SysMenu sysMenu = new SysMenu();
-        BeanUtils.copyProperties(sysMenuAO, sysMenu);
         return sysMenuService.save(sysMenu);
     }
 
     
     /**
     * 更新菜单表
-    * @param sysMenuAO sysMenuAO
+    * @param sysMenu sysMenu
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int update(SysMenuAO sysMenuAO) {
-        if (sysMenuAO == null) {
+    public int update(SysMenu sysMenu) {
+        if (sysMenu == null) {
             throw new RuntimeException("菜单表信息不能为空!");
         }
-        SysMenu sysMenu = new SysMenu();
-        BeanUtils.copyProperties(sysMenuAO, sysMenu);
         return sysMenuService.update(sysMenu);
     }
 
     
     /**
     * 根据条件类查询菜单表列表
-    * @param sysMenuAO sysMenuAO
+    * @param sysMenuQuery sysMenuQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysMenuVO>>
     */
     @Override
-    public Result<List<SysMenuVO>> listByCondition(SysMenuAO sysMenuAO, int pageNum, int pageSize) {
+    public Result<List<SysMenuVO>> listByCondition(SysMenuQuery sysMenuQuery, int pageNum, int pageSize) {
         Result<List<SysMenuVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<SysMenu> sysMenuCond = new Condition<>();
         sysMenuCond.limit(pageNum, pageSize);
@@ -109,13 +105,13 @@ public class SysMenuBusinessImpl implements SysMenuBusiness {
     
     /**
     * 根据条件类查询菜单表总数
-    * @param sysMenuAO sysMenuAO
+    * @param sysMenuQuery sysMenuQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int countByCondition(SysMenuAO sysMenuAO) {
+    public int countByCondition(SysMenuQuery sysMenuQuery) {
         Condition<SysMenu> sysMenuCond = new Condition<>();
         return sysMenuService.countByCondition(sysMenuCond);
     }
@@ -123,12 +119,12 @@ public class SysMenuBusinessImpl implements SysMenuBusiness {
     
     /**
     * 处理菜单表分批查询
-    * @param sysMenuAO sysMenuAO
+    * @param sysMenuQuery sysMenuQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     */
     @Override
-    public void doBatch(SysMenuAO sysMenuAO) {
+    public void doBatch(SysMenuQuery sysMenuQuery) {
         int maxSize = Page.MAX_SIZE - 1 ;
         Condition<SysMenu> sysMenuCond = new Condition<>();
         sysMenuCond.limit(maxSize) ;

@@ -1,6 +1,7 @@
 package com.tsyj.business;
 
-import com.tsyj.ao.SysRoleMenuAO;
+import com.tsyj.model.SysRoleMenu;
+import com.tsyj.query.SysRoleMenuQuery;
 import com.tsyj.response.Result;
 import com.tsyj.vo.SysRoleMenuVO;
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.*;
 /**
 * 角色-菜单service类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 public interface SysRoleMenuBusiness {
     
@@ -16,7 +17,7 @@ public interface SysRoleMenuBusiness {
     * 查询角色-菜单
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return SysRoleMenuVO
     */
     SysRoleMenuVO get(Integer id);
@@ -24,51 +25,51 @@ public interface SysRoleMenuBusiness {
     
     /**
     * 新增角色-菜单
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenu sysRoleMenu
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
-    int save(SysRoleMenuAO sysRoleMenuAO);
+    int save(SysRoleMenu sysRoleMenu);
 
     
     /**
     * 更新角色-菜单
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenu sysRoleMenu
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
-    int update(SysRoleMenuAO sysRoleMenuAO);
+    int update(SysRoleMenu sysRoleMenu);
 
     
     /**
     * 根据条件类查询角色-菜单列表
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenuQuery sysRoleMenuQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysRoleMenuVO>>
     */
-    Result<List<SysRoleMenuVO>> listByCondition(SysRoleMenuAO sysRoleMenuAO, int pageNum, int pageSize);
+    Result<List<SysRoleMenuVO>> listByCondition(SysRoleMenuQuery sysRoleMenuQuery, int pageNum, int pageSize);
 
     
     /**
     * 根据条件类查询角色-菜单总数
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenuQuery sysRoleMenuQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
-    int countByCondition(SysRoleMenuAO sysRoleMenuAO);
+    int countByCondition(SysRoleMenuQuery sysRoleMenuQuery);
 
     
     /**
     * 处理角色-菜单分批查询
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenuQuery sysRoleMenuQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     */
-    void doBatch(SysRoleMenuAO sysRoleMenuAO);
+    void doBatch(SysRoleMenuQuery sysRoleMenuQuery);
 }

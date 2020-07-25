@@ -10,4 +10,8 @@
     <result column="flag" jdbcType="VARCHAR" property="flag" />
   </resultMap>
 
+
+  <sql id="Base_Column_List">
+    `id`, `name`, `code`, `area`, `flag`
+  </sql>
 </mapper>

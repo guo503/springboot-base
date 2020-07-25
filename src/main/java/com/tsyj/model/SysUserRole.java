@@ -2,23 +2,30 @@ package com.tsyj.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import mybatis.core.annotation.Id;
+import mybatis.core.annotation.LogicDelete;
 import mybatis.core.annotation.Table;
 
 /**
 * 用户-角色实体类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Table(name = "sys_user_role")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class SysUserRole implements Serializable {
     
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 195797682849723L;
+    private static final long serialVersionUID = 975797116323917L;
 
     /**
      * 编号
@@ -39,6 +46,7 @@ public class SysUserRole implements Serializable {
     /**
      * 是否删除，0未删除，1已删除，默认0
      */
+    @LogicDelete()
     private Byte isDel;
 
     /**

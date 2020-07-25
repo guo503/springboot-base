@@ -1,9 +1,9 @@
 package com.tsyj.business.impl;
 
 import com.google.common.collect.*;
-import com.tsyj.ao.SysUserRoleAO;
 import com.tsyj.business.SysUserRoleBusiness;
 import com.tsyj.model.SysUserRole;
+import com.tsyj.query.SysUserRoleQuery;
 import com.tsyj.response.Result;
 import com.tsyj.service.SysUserRoleService;
 import com.tsyj.utils.ModelConvertUtils;
@@ -20,7 +20,7 @@ import org.springframework.util.CollectionUtils;
 /**
 * 用户-角色业务类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Service
 public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
@@ -33,7 +33,7 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
     * 查询用户-角色
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return SysUserRoleVO
     */
     @Override
@@ -50,51 +50,47 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
     
     /**
     * 新增用户-角色
-    * @param sysUserRoleAO sysUserRoleAO
+    * @param sysUserRole sysUserRole
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int save(SysUserRoleAO sysUserRoleAO) {
-        if (sysUserRoleAO == null) {
+    public int save(SysUserRole sysUserRole) {
+        if (sysUserRole == null) {
             throw new RuntimeException("用户-角色信息不能为空!");
         }
-        SysUserRole sysUserRole = new SysUserRole();
-        BeanUtils.copyProperties(sysUserRoleAO, sysUserRole);
         return sysUserRoleService.save(sysUserRole);
     }
 
     
     /**
     * 更新用户-角色
-    * @param sysUserRoleAO sysUserRoleAO
+    * @param sysUserRole sysUserRole
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int update(SysUserRoleAO sysUserRoleAO) {
-        if (sysUserRoleAO == null) {
+    public int update(SysUserRole sysUserRole) {
+        if (sysUserRole == null) {
             throw new RuntimeException("用户-角色信息不能为空!");
         }
-        SysUserRole sysUserRole = new SysUserRole();
-        BeanUtils.copyProperties(sysUserRoleAO, sysUserRole);
         return sysUserRoleService.update(sysUserRole);
     }
 
     
     /**
     * 根据条件类查询用户-角色列表
-    * @param sysUserRoleAO sysUserRoleAO
+    * @param sysUserRoleQuery sysUserRoleQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysUserRoleVO>>
     */
     @Override
-    public Result<List<SysUserRoleVO>> listByCondition(SysUserRoleAO sysUserRoleAO, int pageNum, int pageSize) {
+    public Result<List<SysUserRoleVO>> listByCondition(SysUserRoleQuery sysUserRoleQuery, int pageNum, int pageSize) {
         Result<List<SysUserRoleVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<SysUserRole> sysUserRoleCond = new Condition<>();
         sysUserRoleCond.limit(pageNum, pageSize);
@@ -109,13 +105,13 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
     
     /**
     * 根据条件类查询用户-角色总数
-    * @param sysUserRoleAO sysUserRoleAO
+    * @param sysUserRoleQuery sysUserRoleQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int countByCondition(SysUserRoleAO sysUserRoleAO) {
+    public int countByCondition(SysUserRoleQuery sysUserRoleQuery) {
         Condition<SysUserRole> sysUserRoleCond = new Condition<>();
         return sysUserRoleService.countByCondition(sysUserRoleCond);
     }
@@ -123,12 +119,12 @@ public class SysUserRoleBusinessImpl implements SysUserRoleBusiness {
     
     /**
     * 处理用户-角色分批查询
-    * @param sysUserRoleAO sysUserRoleAO
+    * @param sysUserRoleQuery sysUserRoleQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     */
     @Override
-    public void doBatch(SysUserRoleAO sysUserRoleAO) {
+    public void doBatch(SysUserRoleQuery sysUserRoleQuery) {
         int maxSize = Page.MAX_SIZE - 1 ;
         Condition<SysUserRole> sysUserRoleCond = new Condition<>();
         sysUserRoleCond.limit(maxSize) ;

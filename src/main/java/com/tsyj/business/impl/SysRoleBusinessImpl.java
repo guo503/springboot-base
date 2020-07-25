@@ -1,9 +1,9 @@
 package com.tsyj.business.impl;
 
 import com.google.common.collect.*;
-import com.tsyj.ao.SysRoleAO;
 import com.tsyj.business.SysRoleBusiness;
 import com.tsyj.model.SysRole;
+import com.tsyj.query.SysRoleQuery;
 import com.tsyj.response.Result;
 import com.tsyj.service.SysRoleService;
 import com.tsyj.utils.ModelConvertUtils;
@@ -20,7 +20,7 @@ import org.springframework.util.CollectionUtils;
 /**
 * 角色表业务类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Service
 public class SysRoleBusinessImpl implements SysRoleBusiness {
@@ -33,7 +33,7 @@ public class SysRoleBusinessImpl implements SysRoleBusiness {
     * 查询角色表
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return SysRoleVO
     */
     @Override
@@ -50,51 +50,47 @@ public class SysRoleBusinessImpl implements SysRoleBusiness {
     
     /**
     * 新增角色表
-    * @param sysRoleAO sysRoleAO
+    * @param sysRole sysRole
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int save(SysRoleAO sysRoleAO) {
-        if (sysRoleAO == null) {
+    public int save(SysRole sysRole) {
+        if (sysRole == null) {
             throw new RuntimeException("角色表信息不能为空!");
         }
-        SysRole sysRole = new SysRole();
-        BeanUtils.copyProperties(sysRoleAO, sysRole);
         return sysRoleService.save(sysRole);
     }
 
     
     /**
     * 更新角色表
-    * @param sysRoleAO sysRoleAO
+    * @param sysRole sysRole
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int update(SysRoleAO sysRoleAO) {
-        if (sysRoleAO == null) {
+    public int update(SysRole sysRole) {
+        if (sysRole == null) {
             throw new RuntimeException("角色表信息不能为空!");
         }
-        SysRole sysRole = new SysRole();
-        BeanUtils.copyProperties(sysRoleAO, sysRole);
         return sysRoleService.update(sysRole);
     }
 
     
     /**
     * 根据条件类查询角色表列表
-    * @param sysRoleAO sysRoleAO
+    * @param sysRoleQuery sysRoleQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysRoleVO>>
     */
     @Override
-    public Result<List<SysRoleVO>> listByCondition(SysRoleAO sysRoleAO, int pageNum, int pageSize) {
+    public Result<List<SysRoleVO>> listByCondition(SysRoleQuery sysRoleQuery, int pageNum, int pageSize) {
         Result<List<SysRoleVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<SysRole> sysRoleCond = new Condition<>();
         sysRoleCond.limit(pageNum, pageSize);
@@ -109,13 +105,13 @@ public class SysRoleBusinessImpl implements SysRoleBusiness {
     
     /**
     * 根据条件类查询角色表总数
-    * @param sysRoleAO sysRoleAO
+    * @param sysRoleQuery sysRoleQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int countByCondition(SysRoleAO sysRoleAO) {
+    public int countByCondition(SysRoleQuery sysRoleQuery) {
         Condition<SysRole> sysRoleCond = new Condition<>();
         return sysRoleService.countByCondition(sysRoleCond);
     }
@@ -123,12 +119,12 @@ public class SysRoleBusinessImpl implements SysRoleBusiness {
     
     /**
     * 处理角色表分批查询
-    * @param sysRoleAO sysRoleAO
+    * @param sysRoleQuery sysRoleQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     */
     @Override
-    public void doBatch(SysRoleAO sysRoleAO) {
+    public void doBatch(SysRoleQuery sysRoleQuery) {
         int maxSize = Page.MAX_SIZE - 1 ;
         Condition<SysRole> sysRoleCond = new Condition<>();
         sysRoleCond.limit(maxSize) ;

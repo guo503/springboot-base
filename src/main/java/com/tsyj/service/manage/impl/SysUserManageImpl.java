@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * 用户表service实现类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Service
 public class SysUserManageImpl extends ManageImpl<SysUserMapper, SysUser> implements SysUserManage {

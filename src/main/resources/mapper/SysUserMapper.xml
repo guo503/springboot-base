@@ -25,4 +25,10 @@
     <result column="versions" jdbcType="INTEGER" property="versions" />
   </resultMap>
 
+
+  <sql id="Base_Column_List">
+    `id`, `login_name`, `password`, `role_id`, `no`, `name`, `email`, `phone`, `mobile`, 
+    `photo`, `login_ip`, `login_date`, `is_use`, `remarks`, `is_del`, `creator`, `updater`, 
+    `create_time`, `update_time`, `versions`
+  </sql>
 </mapper>

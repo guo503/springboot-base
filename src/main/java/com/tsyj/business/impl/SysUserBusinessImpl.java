@@ -1,9 +1,9 @@
 package com.tsyj.business.impl;
 
 import com.google.common.collect.*;
-import com.tsyj.ao.SysUserAO;
 import com.tsyj.business.SysUserBusiness;
 import com.tsyj.model.SysUser;
+import com.tsyj.query.SysUserQuery;
 import com.tsyj.response.Result;
 import com.tsyj.service.SysUserService;
 import com.tsyj.utils.ModelConvertUtils;
@@ -20,7 +20,7 @@ import org.springframework.util.CollectionUtils;
 /**
 * 用户表业务类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Service
 public class SysUserBusinessImpl implements SysUserBusiness {
@@ -33,7 +33,7 @@ public class SysUserBusinessImpl implements SysUserBusiness {
     * 查询用户表
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return SysUserVO
     */
     @Override
@@ -50,51 +50,47 @@ public class SysUserBusinessImpl implements SysUserBusiness {
     
     /**
     * 新增用户表
-    * @param sysUserAO sysUserAO
+    * @param sysUser sysUser
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int save(SysUserAO sysUserAO) {
-        if (sysUserAO == null) {
+    public int save(SysUser sysUser) {
+        if (sysUser == null) {
             throw new RuntimeException("用户表信息不能为空!");
         }
-        SysUser sysUser = new SysUser();
-        BeanUtils.copyProperties(sysUserAO, sysUser);
         return sysUserService.save(sysUser);
     }
 
     
     /**
     * 更新用户表
-    * @param sysUserAO sysUserAO
+    * @param sysUser sysUser
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int update(SysUserAO sysUserAO) {
-        if (sysUserAO == null) {
+    public int update(SysUser sysUser) {
+        if (sysUser == null) {
             throw new RuntimeException("用户表信息不能为空!");
         }
-        SysUser sysUser = new SysUser();
-        BeanUtils.copyProperties(sysUserAO, sysUser);
         return sysUserService.update(sysUser);
     }
 
     
     /**
     * 根据条件类查询用户表列表
-    * @param sysUserAO sysUserAO
+    * @param sysUserQuery sysUserQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysUserVO>>
     */
     @Override
-    public Result<List<SysUserVO>> listByCondition(SysUserAO sysUserAO, int pageNum, int pageSize) {
+    public Result<List<SysUserVO>> listByCondition(SysUserQuery sysUserQuery, int pageNum, int pageSize) {
         Result<List<SysUserVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<SysUser> sysUserCond = new Condition<>();
         sysUserCond.limit(pageNum, pageSize);
@@ -109,13 +105,13 @@ public class SysUserBusinessImpl implements SysUserBusiness {
     
     /**
     * 根据条件类查询用户表总数
-    * @param sysUserAO sysUserAO
+    * @param sysUserQuery sysUserQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int countByCondition(SysUserAO sysUserAO) {
+    public int countByCondition(SysUserQuery sysUserQuery) {
         Condition<SysUser> sysUserCond = new Condition<>();
         return sysUserService.countByCondition(sysUserCond);
     }
@@ -123,12 +119,12 @@ public class SysUserBusinessImpl implements SysUserBusiness {
     
     /**
     * 处理用户表分批查询
-    * @param sysUserAO sysUserAO
+    * @param sysUserQuery sysUserQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     */
     @Override
-    public void doBatch(SysUserAO sysUserAO) {
+    public void doBatch(SysUserQuery sysUserQuery) {
         int maxSize = Page.MAX_SIZE - 1 ;
         Condition<SysUser> sysUserCond = new Condition<>();
         sysUserCond.limit(maxSize) ;

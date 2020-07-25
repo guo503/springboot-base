@@ -7,7 +7,7 @@ import mybatis.base.mapper.SoftDeleteMapper;
 /**
 * 菜单表数据访问层
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 public interface SysMenuMapper extends Mapper<SysMenu>, SoftDeleteMapper<SysMenu> {
 }

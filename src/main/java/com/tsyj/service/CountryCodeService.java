@@ -6,7 +6,7 @@ import mybatis.base.template.service.IService;
 /**
 * 国际电话号码区号service类
 * @author guos
-* @date 2020/07/11 17:37
+* @date 2020/07/25 18:01
 */
 public interface CountryCodeService extends IService<CountryCode> {
 }

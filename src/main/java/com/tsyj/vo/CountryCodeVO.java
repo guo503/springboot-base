@@ -5,9 +5,9 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
-* 国际电话号码区号实体类
+* 国际电话号码区号显示类
 * @author guos
-* @date 2020/07/11 17:37
+* @date 2020/07/25 18:01
 */
 @Data
 public class CountryCodeVO extends CountryCode implements Serializable {
@@ -15,5 +15,5 @@ public class CountryCodeVO extends CountryCode implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 644471727254111L;
+    private static final long serialVersionUID = 584751393826618L;
 }

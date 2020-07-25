@@ -1,9 +1,9 @@
 package com.tsyj.business.impl;
 
 import com.google.common.collect.*;
-import com.tsyj.ao.SysRoleMenuAO;
 import com.tsyj.business.SysRoleMenuBusiness;
 import com.tsyj.model.SysRoleMenu;
+import com.tsyj.query.SysRoleMenuQuery;
 import com.tsyj.response.Result;
 import com.tsyj.service.SysRoleMenuService;
 import com.tsyj.utils.ModelConvertUtils;
@@ -20,7 +20,7 @@ import org.springframework.util.CollectionUtils;
 /**
 * 角色-菜单业务类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Service
 public class SysRoleMenuBusinessImpl implements SysRoleMenuBusiness {
@@ -33,7 +33,7 @@ public class SysRoleMenuBusinessImpl implements SysRoleMenuBusiness {
     * 查询角色-菜单
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return SysRoleMenuVO
     */
     @Override
@@ -50,51 +50,47 @@ public class SysRoleMenuBusinessImpl implements SysRoleMenuBusiness {
     
     /**
     * 新增角色-菜单
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenu sysRoleMenu
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int save(SysRoleMenuAO sysRoleMenuAO) {
-        if (sysRoleMenuAO == null) {
+    public int save(SysRoleMenu sysRoleMenu) {
+        if (sysRoleMenu == null) {
             throw new RuntimeException("角色-菜单信息不能为空!");
         }
-        SysRoleMenu sysRoleMenu = new SysRoleMenu();
-        BeanUtils.copyProperties(sysRoleMenuAO, sysRoleMenu);
         return sysRoleMenuService.save(sysRoleMenu);
     }
 
     
     /**
     * 更新角色-菜单
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenu sysRoleMenu
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int update(SysRoleMenuAO sysRoleMenuAO) {
-        if (sysRoleMenuAO == null) {
+    public int update(SysRoleMenu sysRoleMenu) {
+        if (sysRoleMenu == null) {
             throw new RuntimeException("角色-菜单信息不能为空!");
         }
-        SysRoleMenu sysRoleMenu = new SysRoleMenu();
-        BeanUtils.copyProperties(sysRoleMenuAO, sysRoleMenu);
         return sysRoleMenuService.update(sysRoleMenu);
     }
 
     
     /**
     * 根据条件类查询角色-菜单列表
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenuQuery sysRoleMenuQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysRoleMenuVO>>
     */
     @Override
-    public Result<List<SysRoleMenuVO>> listByCondition(SysRoleMenuAO sysRoleMenuAO, int pageNum, int pageSize) {
+    public Result<List<SysRoleMenuVO>> listByCondition(SysRoleMenuQuery sysRoleMenuQuery, int pageNum, int pageSize) {
         Result<List<SysRoleMenuVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<SysRoleMenu> sysRoleMenuCond = new Condition<>();
         sysRoleMenuCond.limit(pageNum, pageSize);
@@ -109,13 +105,13 @@ public class SysRoleMenuBusinessImpl implements SysRoleMenuBusiness {
     
     /**
     * 根据条件类查询角色-菜单总数
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenuQuery sysRoleMenuQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
     @Override
-    public int countByCondition(SysRoleMenuAO sysRoleMenuAO) {
+    public int countByCondition(SysRoleMenuQuery sysRoleMenuQuery) {
         Condition<SysRoleMenu> sysRoleMenuCond = new Condition<>();
         return sysRoleMenuService.countByCondition(sysRoleMenuCond);
     }
@@ -123,12 +119,12 @@ public class SysRoleMenuBusinessImpl implements SysRoleMenuBusiness {
     
     /**
     * 处理角色-菜单分批查询
-    * @param sysRoleMenuAO sysRoleMenuAO
+    * @param sysRoleMenuQuery sysRoleMenuQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     */
     @Override
-    public void doBatch(SysRoleMenuAO sysRoleMenuAO) {
+    public void doBatch(SysRoleMenuQuery sysRoleMenuQuery) {
         int maxSize = Page.MAX_SIZE - 1 ;
         Condition<SysRoleMenu> sysRoleMenuCond = new Condition<>();
         sysRoleMenuCond.limit(maxSize) ;

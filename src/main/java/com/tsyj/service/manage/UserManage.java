@@ -6,7 +6,7 @@ import mybatis.base.template.manage.IManage;
 /**
 * 用户service类
 * @author guos
-* @date 2020/07/11 17:38
+* @date 2020/07/25 10:42
 */
 public interface UserManage extends IManage<User> {
 }

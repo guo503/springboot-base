@@ -1,23 +1,29 @@
 package com.tsyj.model;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import mybatis.core.annotation.Id;
 import mybatis.core.annotation.Table;
 
 /**
 * 国际电话号码区号实体类
 * @author guos
-* @date 2020/07/11 17:37
+* @date 2020/07/25 18:01
 */
 @Table(name = "country_code")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CountryCode implements Serializable {
     
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 614389423584382L;
+    private static final long serialVersionUID = 746915436333122L;
 
     /**
      * 

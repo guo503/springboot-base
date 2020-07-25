@@ -14,4 +14,9 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
 
+
+  <sql id="Base_Column_List">
+    `id`, `name`, `phone`, `is_del`, `creator`, `updater`, `create_time`, `update_time`, 
+    `version`
+  </sql>
 </mapper>

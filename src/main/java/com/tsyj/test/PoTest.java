@@ -1,8 +1,5 @@
 package com.tsyj.test;
 
-import com.tsyj.model.User;
-
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
 /**
@@ -15,11 +12,11 @@ public class PoTest {
     public static void main(String[] args) {
         //BigDecimal var = new BigDecimal("10");
         //System.out.println(reset(var));
+        String a = new String("xxx"), b = new String("xxx");
+        System.out.println(a.equals(b));
+        System.out.println(a == b);
+        System.out.println(a == "xxx");
 
-        Field[] declaredFields = User.class.getDeclaredFields();
-        for(Field field:declaredFields){
-            System.out.println(field.getType().getSimpleName());
-        }
     }
 
     public static BigDecimal reset(BigDecimal var) {

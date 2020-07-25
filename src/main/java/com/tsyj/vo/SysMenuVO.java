@@ -1,14 +1,13 @@
 package com.tsyj.vo;
 
 import com.tsyj.model.SysMenu;
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.Data;
 
 /**
 * 菜单表实体类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @Data
 public class SysMenuVO extends SysMenu implements Serializable {
@@ -16,10 +15,5 @@ public class SysMenuVO extends SysMenu implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 543675745213643L;
-
-    /**
-     * 角色id
-     */
-    private Integer roleId;
+    private static final long serialVersionUID = 228259419482477L;
 }

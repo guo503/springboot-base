@@ -1,6 +1,7 @@
 package com.tsyj.business;
 
-import com.tsyj.ao.SysUserAO;
+import com.tsyj.model.SysUser;
+import com.tsyj.query.SysUserQuery;
 import com.tsyj.response.Result;
 import com.tsyj.vo.SysUserVO;
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.*;
 /**
 * 用户表service类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 public interface SysUserBusiness {
     
@@ -16,7 +17,7 @@ public interface SysUserBusiness {
     * 查询用户表
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return SysUserVO
     */
     SysUserVO get(Integer id);
@@ -24,51 +25,51 @@ public interface SysUserBusiness {
     
     /**
     * 新增用户表
-    * @param sysUserAO sysUserAO
+    * @param sysUser sysUser
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
-    int save(SysUserAO sysUserAO);
+    int save(SysUser sysUser);
 
     
     /**
     * 更新用户表
-    * @param sysUserAO sysUserAO
+    * @param sysUser sysUser
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
-    int update(SysUserAO sysUserAO);
+    int update(SysUser sysUser);
 
     
     /**
     * 根据条件类查询用户表列表
-    * @param sysUserAO sysUserAO
+    * @param sysUserQuery sysUserQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysUserVO>>
     */
-    Result<List<SysUserVO>> listByCondition(SysUserAO sysUserAO, int pageNum, int pageSize);
+    Result<List<SysUserVO>> listByCondition(SysUserQuery sysUserQuery, int pageNum, int pageSize);
 
     
     /**
     * 根据条件类查询用户表总数
-    * @param sysUserAO sysUserAO
+    * @param sysUserQuery sysUserQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return int
     */
-    int countByCondition(SysUserAO sysUserAO);
+    int countByCondition(SysUserQuery sysUserQuery);
 
     
     /**
     * 处理用户表分批查询
-    * @param sysUserAO sysUserAO
+    * @param sysUserQuery sysUserQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     */
-    void doBatch(SysUserAO sysUserAO);
+    void doBatch(SysUserQuery sysUserQuery);
 }

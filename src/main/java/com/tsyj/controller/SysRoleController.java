@@ -1,7 +1,8 @@
 package com.tsyj.controller;
 
-import com.tsyj.ao.SysRoleAO;
 import com.tsyj.business.SysRoleBusiness;
+import com.tsyj.model.SysRole;
+import com.tsyj.query.SysRoleQuery;
 import com.tsyj.response.Result;
 import com.tsyj.vo.SysRoleVO;
 import java.util.*;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
 * 角色表api类
 * @author guos
-* @date 2020/07/11 17:24
+* @date 2020/07/24 16:57
 */
 @RestController
 @RequestMapping("/sys-role")
@@ -26,7 +27,7 @@ public class SysRoleController extends BaseController {
     * 查询角色表
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<SysRoleVO>
     */
     @GetMapping("/{id}")
@@ -37,41 +38,41 @@ public class SysRoleController extends BaseController {
     
     /**
     * 新增角色表
-    * @param sysRoleAO sysRoleAO
+    * @param sysRole sysRole
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<Object>
     */
     @PostMapping
-    public Result<Object> save(@RequestBody SysRoleAO sysRoleAO) {
-        return sysRoleBusiness.save(sysRoleAO) > 0 ? Result.success("角色表添加成功"): Result.fail("角色表添加失败");
+    public Result<Object> save(@RequestBody SysRole sysRole) {
+        return sysRoleBusiness.save(sysRole) > 0 ? Result.success("角色表添加成功"): Result.fail("角色表添加失败");
     }
 
     
     /**
     * 更新角色表
     * @param id id
-    * @param sysRoleAO sysRoleAO
+    * @param sysRole sysRole
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<Object>
     */
     @PutMapping("/{id}")
-    public Result<Object> update(@PathVariable("id") Integer id, @RequestBody SysRoleAO sysRoleAO) {
-        sysRoleAO.setId(id);
-        return sysRoleBusiness.update(sysRoleAO) > 0 ? Result.success("角色表更新成功"): Result.fail("角色表更新失败");
+    public Result<Object> update(@PathVariable("id") Integer id, @RequestBody SysRole sysRole) {
+        sysRole.setId(id);
+        return sysRoleBusiness.update(sysRole) > 0 ? Result.success("角色表更新成功"): Result.fail("角色表更新失败");
     }
 
     
     /**
     * 根据条件类查询角色表列表
-    * @param sysRoleAO sysRoleAO
+    * @param sysRoleQuery sysRoleQuery
     * @author guos
-    * @date 2020/07/11 17:24
+    * @date 2020/07/24 16:57
     * @return Result<List<SysRoleVO>>
     */
     @GetMapping
-    public Result<List<SysRoleVO>> listByCondition(SysRoleAO sysRoleAO) {
-        return sysRoleBusiness.listByCondition(sysRoleAO, this.getPageNum(), this.getPageSize());
+    public Result<List<SysRoleVO>> listByCondition(SysRoleQuery sysRoleQuery) {
+        return sysRoleBusiness.listByCondition(sysRoleQuery, this.getPageNum(), this.getPageSize());
     }
 }

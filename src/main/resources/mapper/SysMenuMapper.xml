@@ -22,4 +22,10 @@
     <result column="versions" jdbcType="INTEGER" property="versions" />
   </resultMap>
 
+
+  <sql id="Base_Column_List">
+    `id`, `parent_id`, `parent_ids`, `name`, `sort_no`, `href`, `target`, `icon`, `is_show`, 
+    `permission`, `remarks`, `is_del`, `creator`, `updater`, `create_time`, `update_time`, 
+    `versions`
+  </sql>
 </mapper>

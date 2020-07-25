@@ -1,15 +1,13 @@
 package com.tsyj.business.impl;
 
-import com.google.common.collect.*;
-import com.tsyj.ao.CountryCodeAO;
+import com.google.common.collect.Lists;
 import com.tsyj.business.CountryCodeBusiness;
 import com.tsyj.model.CountryCode;
+import com.tsyj.query.CountryCodeQuery;
 import com.tsyj.response.Result;
 import com.tsyj.service.CountryCodeService;
 import com.tsyj.utils.ModelConvertUtils;
 import com.tsyj.vo.CountryCodeVO;
-import java.util.*;
-import java.util.stream.Collectors;
 import mybatis.core.entity.Condition;
 import mybatis.core.page.Page;
 import org.springframework.beans.BeanUtils;
@@ -17,10 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
 * 国际电话号码区号业务类
 * @author guos
-* @date 2020/07/11 17:37
+* @date 2020/07/25 18:01
 */
 @Service
 public class CountryCodeBusinessImpl implements CountryCodeBusiness {
@@ -33,14 +34,17 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/07/11 17:37
+    * @date 2020/07/25 18:01
     * @return CountryCodeVO
     */
     @Override
     public CountryCodeVO get(Integer id) {
+        if (Objects.isNull(id)) {
+            throw new RuntimeException("id不能为空!");
+        }
         CountryCode countryCode = countryCodeService.get(id);
         CountryCodeVO countryCodeVO = new CountryCodeVO();
-        if (countryCode == null) {
+        if (Objects.isNull(countryCode)) {
             return countryCodeVO;
         }
         BeanUtils.copyProperties(countryCode, countryCodeVO);
@@ -50,54 +54,54 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     
     /**
     * 新增国际电话号码区号
-    * @param countryCodeAO countryCodeAO
+    * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/11 17:37
+    * @date 2020/07/25 18:01
     * @return int
     */
     @Override
-    public int save(CountryCodeAO countryCodeAO) {
-        if (countryCodeAO == null) {
+    public int save(CountryCode countryCode) {
+        if (Objects.isNull(countryCode)) {
             throw new RuntimeException("国际电话号码区号信息不能为空!");
         }
-        CountryCode countryCode = new CountryCode();
-        BeanUtils.copyProperties(countryCodeAO, countryCode);
         return countryCodeService.save(countryCode);
     }
 
     
     /**
     * 更新国际电话号码区号
-    * @param countryCodeAO countryCodeAO
+    * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/11 17:37
+    * @date 2020/07/25 18:01
     * @return int
     */
     @Override
-    public int update(CountryCodeAO countryCodeAO) {
-        if (countryCodeAO == null) {
+    public int update(CountryCode countryCode) {
+        if (Objects.isNull(countryCode)) {
             throw new RuntimeException("国际电话号码区号信息不能为空!");
         }
-        CountryCode countryCode = new CountryCode();
-        BeanUtils.copyProperties(countryCodeAO, countryCode);
         return countryCodeService.update(countryCode);
     }
 
     
     /**
     * 根据条件类查询国际电话号码区号列表
-    * @param countryCodeAO countryCodeAO
+    * @param countryCodeQuery countryCodeQuery
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/11 17:37
+    * @date 2020/07/25 18:01
     * @return Result<List<CountryCodeVO>>
     */
     @Override
-    public Result<List<CountryCodeVO>> listByCondition(CountryCodeAO countryCodeAO, int pageNum, int pageSize) {
+    public Result<List<CountryCodeVO>> listByCondition(CountryCodeQuery countryCodeQuery, int pageNum, int pageSize) {
         Result<List<CountryCodeVO>> result = Result.success(Lists.newArrayList(), 0);
         Condition<CountryCode> countryCodeCond = new Condition<>();
         countryCodeCond.limit(pageNum, pageSize);
+        Condition<CountryCode>.Criteria criteria = countryCodeCond.createCriteria();
+        if (Objects.nonNull(countryCodeQuery.getId())) {
+            criteria.andEqual(CountryCode.ID, countryCodeQuery.getId());
+        }
         int count = countryCodeService.countByCondition(countryCodeCond);
         if (count == 0){
             return result;
@@ -109,13 +113,13 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     
     /**
     * 根据条件类查询国际电话号码区号总数
-    * @param countryCodeAO countryCodeAO
+    * @param countryCodeQuery countryCodeQuery
     * @author guos
-    * @date 2020/07/11 17:37
+    * @date 2020/07/25 18:01
     * @return int
     */
     @Override
-    public int countByCondition(CountryCodeAO countryCodeAO) {
+    public int countByCondition(CountryCodeQuery countryCodeQuery) {
         Condition<CountryCode> countryCodeCond = new Condition<>();
         return countryCodeService.countByCondition(countryCodeCond);
     }
@@ -123,12 +127,12 @@ public class CountryCodeBusinessImpl implements CountryCodeBusiness {
     
     /**
     * 处理国际电话号码区号分批查询
-    * @param countryCodeAO countryCodeAO
+    * @param countryCodeQuery countryCodeQuery
     * @author guos
-    * @date 2020/07/11 17:37
+    * @date 2020/07/25 18:01
     */
     @Override
-    public void doBatch(CountryCodeAO countryCodeAO) {
+    public void doBatch(CountryCodeQuery countryCodeQuery) {
         int maxSize = Page.MAX_SIZE - 1 ;
         Condition<CountryCode> countryCodeCond = new Condition<>();
         countryCodeCond.limit(maxSize) ;
