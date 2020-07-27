@@ -7,7 +7,7 @@ import lombok.Data;
 /**
 * 国际电话号码区号显示类
 * @author guos
-* @date 2020/07/25 18:01
+* @date 2020/07/27 09:40
 */
 @Data
 public class CountryCodeVO extends CountryCode implements Serializable {
@@ -15,5 +15,5 @@ public class CountryCodeVO extends CountryCode implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 584751393826618L;
+    private static final long serialVersionUID = 636232473172248L;
 }

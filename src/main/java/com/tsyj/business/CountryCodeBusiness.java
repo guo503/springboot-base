@@ -9,7 +9,7 @@ import java.util.*;
 /**
 * 国际电话号码区号service类
 * @author guos
-* @date 2020/07/25 18:01
+* @date 2020/07/27 09:40
 */
 public interface CountryCodeBusiness {
     
@@ -17,7 +17,7 @@ public interface CountryCodeBusiness {
     * 查询国际电话号码区号
     * @param id id
     * @author guos
-    * @date 2020/07/25 18:01
+    * @date 2020/07/27 09:40
     * @return CountryCodeVO
     */
     CountryCodeVO get(Integer id);
@@ -27,7 +27,7 @@ public interface CountryCodeBusiness {
     * 新增国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/25 18:01
+    * @date 2020/07/27 09:40
     * @return int
     */
     int save(CountryCode countryCode);
@@ -37,7 +37,7 @@ public interface CountryCodeBusiness {
     * 更新国际电话号码区号
     * @param countryCode countryCode
     * @author guos
-    * @date 2020/07/25 18:01
+    * @date 2020/07/27 09:40
     * @return int
     */
     int update(CountryCode countryCode);
@@ -49,7 +49,7 @@ public interface CountryCodeBusiness {
     * @param pageNum pageNum
     * @param pageSize pageSize
     * @author guos
-    * @date 2020/07/25 18:01
+    * @date 2020/07/27 09:40
     * @return Result<List<CountryCodeVO>>
     */
     Result<List<CountryCodeVO>> listByCondition(CountryCodeQuery countryCodeQuery, int pageNum, int pageSize);
@@ -59,7 +59,7 @@ public interface CountryCodeBusiness {
     * 根据条件类查询国际电话号码区号总数
     * @param countryCodeQuery countryCodeQuery
     * @author guos
-    * @date 2020/07/25 18:01
+    * @date 2020/07/27 09:40
     * @return int
     */
     int countByCondition(CountryCodeQuery countryCodeQuery);
@@ -69,7 +69,7 @@ public interface CountryCodeBusiness {
     * 处理国际电话号码区号分批查询
     * @param countryCodeQuery countryCodeQuery
     * @author guos
-    * @date 2020/07/25 18:01
+    * @date 2020/07/27 09:40
     */
     void doBatch(CountryCodeQuery countryCodeQuery);
 }
