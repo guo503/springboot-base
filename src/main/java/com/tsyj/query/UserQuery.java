@@ -4,9 +4,9 @@ import java.util.Date;
 import lombok.Data;
 
 /**
-* 用户实体类
+* 用户查询条件类
 * @author guos
-* @date 2020/07/25 10:42
+* @date 2020/07/28 16:16
 */
 @Data
 public class UserQuery {

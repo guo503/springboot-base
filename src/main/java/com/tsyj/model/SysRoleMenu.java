@@ -13,7 +13,7 @@ import mybatis.core.annotation.Table;
 /**
 * 角色-菜单实体类
 * @author guos
-* @date 2020/07/24 16:57
+* @date 2020/07/28 18:13
 */
 @Table(name = "sys_role_menu")
 @Data
@@ -25,7 +25,7 @@ public class SysRoleMenu implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 923769382662966L;
+    private static final long serialVersionUID = 619785559636345L;
 
     /**
      * 编号

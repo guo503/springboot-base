@@ -13,7 +13,7 @@ import mybatis.core.annotation.Table;
 /**
 * 用户-角色实体类
 * @author guos
-* @date 2020/07/24 16:57
+* @date 2020/07/28 18:13
 */
 @Table(name = "sys_user_role")
 @Data
@@ -25,7 +25,7 @@ public class SysUserRole implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 975797116323917L;
+    private static final long serialVersionUID = 766534977277574L;
 
     /**
      * 编号

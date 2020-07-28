@@ -1,6 +1,13 @@
 package com.tsyj.test;
 
+import com.google.common.collect.Lists;
+import com.tsyj.model.User;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @description:
@@ -10,12 +17,20 @@ import java.math.BigDecimal;
 public class PoTest {
 
     public static void main(String[] args) {
-        //BigDecimal var = new BigDecimal("10");
-        //System.out.println(reset(var));
-        String a = new String("xxx"), b = new String("xxx");
-        System.out.println(a.equals(b));
-        System.out.println(a == b);
-        System.out.println(a == "xxx");
+        User user = new User();
+        user.setId(1);
+        user.setName("tsyj");
+        List<Field> fields = Lists.newArrayList(User.class.getDeclaredFields());
+        fields.stream().filter(f -> Objects.equals(f.getModifiers(), Modifier.PRIVATE)).forEach(f -> {
+            System.out.println(f.getName() + "--->" + f.getModifiers());
+            try {
+                f.setAccessible(true);
+                System.out.println(f.getName() + ": " + f.get(user));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
+
 
     }
 

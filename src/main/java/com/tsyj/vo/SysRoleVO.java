@@ -5,9 +5,9 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
-* 角色表实体类
+* 角色表显示类
 * @author guos
-* @date 2020/07/24 16:57
+* @date 2020/07/28 18:13
 */
 @Data
 public class SysRoleVO extends SysRole implements Serializable {
@@ -15,5 +15,5 @@ public class SysRoleVO extends SysRole implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 982136464945555L;
+    private static final long serialVersionUID = 691954568972599L;
 }

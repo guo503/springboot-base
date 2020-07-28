@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * 角色-菜单service实现类
 * @author guos
-* @date 2020/07/24 16:57
+* @date 2020/07/28 18:13
 */
 @Service
 public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuManage, SysRoleMenu> implements SysRoleMenuService {

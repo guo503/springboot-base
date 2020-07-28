@@ -1,5 +1,7 @@
 package com.tsyj.model;
 
+import java.io.Serializable;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,13 +10,10 @@ import mybatis.core.annotation.Id;
 import mybatis.core.annotation.LogicDelete;
 import mybatis.core.annotation.Table;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
 * 菜单表实体类
 * @author guos
-* @date 2020/07/24 16:57
+* @date 2020/07/28 18:13
 */
 @Table(name = "sys_menu")
 @Data
@@ -26,7 +25,7 @@ public class SysMenu implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 283379755231544L;
+    private static final long serialVersionUID = 472869371669952L;
 
     /**
      * 编号

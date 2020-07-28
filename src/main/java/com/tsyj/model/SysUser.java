@@ -13,7 +13,7 @@ import mybatis.core.annotation.Table;
 /**
 * 用户表实体类
 * @author guos
-* @date 2020/07/24 16:57
+* @date 2020/07/28 18:13
 */
 @Table(name = "sys_user")
 @Data
@@ -25,7 +25,7 @@ public class SysUser implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 436449715583746L;
+    private static final long serialVersionUID = 192334149336955L;
 
     /**
      * 编号

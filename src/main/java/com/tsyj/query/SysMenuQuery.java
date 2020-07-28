@@ -1,13 +1,12 @@
 package com.tsyj.query;
 
+import java.util.Date;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
-* 菜单表实体类
+* 菜单表查询条件类
 * @author guos
-* @date 2020/07/24 16:57
+* @date 2020/07/28 18:13
 */
 @Data
 public class SysMenuQuery {

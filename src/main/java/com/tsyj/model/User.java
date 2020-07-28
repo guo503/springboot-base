@@ -1,5 +1,7 @@
 package com.tsyj.model;
 
+import java.io.Serializable;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,13 +11,10 @@ import mybatis.core.annotation.LogicDelete;
 import mybatis.core.annotation.Table;
 import mybatis.core.annotation.Version;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
 * 用户实体类
 * @author guos
-* @date 2020/07/25 10:42
+* @date 2020/07/28 16:16
 */
 @Table(name = "user")
 @Data
@@ -27,7 +26,7 @@ public class User implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 574231818338222L;
+    private static final long serialVersionUID = 527344628468532L;
 
     /**
      * 编号
