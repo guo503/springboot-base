@@ -23,6 +23,7 @@ public class CountryCodeBusinessImpl extends BusinessImpl<CountryCodeService, Co
     @Override
     public List<CountryCodeVO> listByCondition(CountryCodeQuery countryCodeQuery, int pageNum, int pageSize) {
         Condition<CountryCode> condition = this.getCondition(countryCodeQuery);
+        condition.setOrderBy(CountryCode.ID).desc();
         condition.setOrderBy(CountryCode.CODE).desc();
         return super.listByCondition(condition);
     }
