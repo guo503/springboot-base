@@ -7,7 +7,7 @@ import mybatis.base.mapper.SoftDeleteMapper;
 /**
 * 国际电话号码区号数据访问层
 * @author guos
-* @date 2020/07/28 18:25
+* @date 2020/07/30 09:39
 */
 public interface CountryCodeMapper extends Mapper<CountryCode>, SoftDeleteMapper<CountryCode> {
 }

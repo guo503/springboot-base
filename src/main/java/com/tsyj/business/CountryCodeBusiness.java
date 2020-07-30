@@ -8,7 +8,7 @@ import mybatis.base.template.business.IBusiness;
 /**
 * 国际电话号码区号service类
 * @author guos
-* @date 2020/07/28 18:25
+* @date 2020/07/30 09:39
 */
 public interface CountryCodeBusiness extends IBusiness<CountryCode, CountryCodeQuery, CountryCodeVO> {
 }
