@@ -51,35 +51,33 @@ public class AuthorizationRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         if (principal instanceof SysUser) {
             SysUser userLogin = (SysUser) principal;
-            if (userLogin != null) {
-                Condition<SysUserRole> sysUserRoleCondition = new Condition<>();
-                sysUserRoleCondition.createCriteria().andEqual(SysUserRole.USER_ID, userLogin.getId());
-                sysUserRoleCondition.limit(Page.getMaxRow());
-                List<SysUserRole> sysUserRoleList = sysUserRoleService.listByCondition(sysUserRoleCondition);
-                if (CollectionUtils.isNotEmpty(sysUserRoleList)) {
-                    //角色列表
-                    List<Integer> roleIds = sysUserRoleList.stream().map(SysUserRole::getUserId).distinct().collect(Collectors.toList());
-                    Map<Integer, SysRole> sysRoleMap = sysRoleService.mapByIds(roleIds);
+            Condition<SysUserRole> sysUserRoleCondition = new Condition<>();
+            sysUserRoleCondition.createCriteria().andEqual(SysUserRole.USER_ID, userLogin.getId());
+            sysUserRoleCondition.limit(Page.getMaxRow());
+            List<SysUserRole> sysUserRoleList = sysUserRoleService.listByCondition(sysUserRoleCondition);
+            if (CollectionUtils.isNotEmpty(sysUserRoleList)) {
+                //角色列表
+                List<Integer> roleIds = sysUserRoleList.stream().map(SysUserRole::getUserId).distinct().collect(Collectors.toList());
+                Map<Integer, SysRole> sysRoleMap = sysRoleService.mapByIds(roleIds);
 
-                    Condition<SysRoleMenu> sysRoleMenuCondition = new Condition<>();
-                    sysRoleMenuCondition.createCriteria().andIn(SysRoleMenu.ROLE_ID, roleIds);
-                    sysRoleMenuCondition.limit(Page.getMaxRow());
-                    List<SysRoleMenu> sysRoleMenuList = sysRoleMenuService.listByCondition(sysRoleMenuCondition);
-                    //菜单列表
-                    List<Integer> menuIds = sysRoleMenuList.stream().map(SysRoleMenu::getMenuId).distinct().collect(Collectors.toList());
-                    Map<Integer, SysMenu> sysMenuMap = sysMenuService.mapByIds(menuIds);
+                Condition<SysRoleMenu> sysRoleMenuCondition = new Condition<>();
+                sysRoleMenuCondition.createCriteria().andIn(SysRoleMenu.ROLE_ID, roleIds);
+                sysRoleMenuCondition.limit(Page.getMaxRow());
+                List<SysRoleMenu> sysRoleMenuList = sysRoleMenuService.listByCondition(sysRoleMenuCondition);
+                //菜单列表
+                List<Integer> menuIds = sysRoleMenuList.stream().map(SysRoleMenu::getMenuId).distinct().collect(Collectors.toList());
+                Map<Integer, SysMenu> sysMenuMap = sysMenuService.mapByIds(menuIds);
 
-                    sysRoleMenuList.forEach(a -> {
-                        SysRole sysRole = sysRoleMap.get(a.getRoleId());
-                        if (sysRole != null) {
-                            info.addRole(sysRole.getEnName());
-                        }
-                        SysMenu sysMenu = sysMenuMap.get(a.getMenuId());
-                        if (sysMenu != null) {
-                            info.addRole(sysMenu.getPermission());
-                        }
-                    });
-                }
+                sysRoleMenuList.forEach(a -> {
+                    SysRole sysRole = sysRoleMap.get(a.getRoleId());
+                    if (sysRole != null) {
+                        info.addRole(sysRole.getEnName());
+                    }
+                    SysMenu sysMenu = sysMenuMap.get(a.getMenuId());
+                    if (sysMenu != null) {
+                        info.addRole(sysMenu.getPermission());
+                    }
+                });
             }
         }
         log.info("---------------- 获取到以下权限 ----------------");

@@ -1,7 +1,8 @@
 package com.tsyj.query;
 
-import java.util.Date;
 import lombok.Data;
+
+import java.util.List;
 
 /**
 * 用户查询条件类
@@ -35,23 +36,29 @@ public class UserQuery {
      */
     private String creator;
 
-    /**
-     * 修改人姓名
-     */
-    private String updater;
+    private Integer neqId;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+    private List<Integer> ids;
 
-    /**
-     * 最近一次修改时间
-     */
-    private Date updateTime;
+    private List<Integer> ninIds;
 
-    /**
-     * 版本号
-     */
-    private Integer version;
+    private Integer lteId;
+
+    private Integer gteId;
+
+    private Integer ltId;
+
+    private Integer gtId;
+
+    private String lkName;
+
+    private String nName;
+
+    private String nnName;
+
+    private String idSort;
+
+    private String isDelSort;
+
+
 }
