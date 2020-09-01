@@ -87,21 +87,24 @@ public class DateUtils {
 
 
     /**
-     * 获取下一天
-     *
+     * 根据间隔获取日期
      * @param date
+     * @param interval
+     * @author guos
+     * @date 2020/9/1 8:55
      * @return
-     */
-    public static Date getNextDate(Date date) {
+     **/
+    public static Date getDate(Date date,int interval) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        cal.add(Calendar.DAY_OF_MONTH, 1);
+        cal.add(Calendar.DAY_OF_MONTH, interval);
         return cal.getTime();
     }
+
 
 
     /**

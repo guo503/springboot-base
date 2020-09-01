@@ -5,7 +5,6 @@ import com.tsyj.model.User;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +16,16 @@ import java.util.Objects;
 public class PoTest {
 
     public static void main(String[] args) {
+        int i = 1;
+        i=i++;
+        int j = i++;
+        int k = i + ++i * i++;
+        System.out.println("i="+i);
+        System.out.println("j="+j);
+        System.out.println("k="+k);
+    }
+
+    private static void show() {
         User user = new User();
         user.setId(1);
         user.setName("tsyj");
@@ -30,13 +39,5 @@ public class PoTest {
                 e.printStackTrace();
             }
         });
-
-
-    }
-
-    public static BigDecimal reset(BigDecimal var) {
-        System.out.println(var.add(BigDecimal.ONE));
-        var = var.add(BigDecimal.ONE);
-        return var;
     }
 }

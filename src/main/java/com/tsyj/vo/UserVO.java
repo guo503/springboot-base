@@ -1,8 +1,9 @@
 package com.tsyj.vo;
 
 import com.tsyj.model.User;
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
 * 用户显示类
@@ -16,4 +17,11 @@ public class UserVO extends User implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = 651436811964537L;
+
+
+    private String phone1;
+
+    private String phone2;
+
+    private String phone3;
 }
