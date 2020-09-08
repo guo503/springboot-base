@@ -1,13 +1,5 @@
 package com.tsyj.test;
 
-import com.google.common.collect.Lists;
-import com.tsyj.model.User;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.List;
-import java.util.Objects;
-
 /**
  * @description:
  * @author: guos
@@ -16,28 +8,36 @@ import java.util.Objects;
 public class PoTest {
 
     public static void main(String[] args) {
-        int i = 1;
-        i=i++;
-        int j = i++;
-        int k = i + ++i * i++;
-        System.out.println("i="+i);
-        System.out.println("j="+j);
-        System.out.println("k="+k);
+        //sxh();
+        fblqsl();
     }
 
-    private static void show() {
-        User user = new User();
-        user.setId(1);
-        user.setName("tsyj");
-        List<Field> fields = Lists.newArrayList(User.class.getDeclaredFields());
-        fields.stream().filter(f -> Objects.equals(f.getModifiers(), Modifier.PRIVATE)).forEach(f -> {
-            System.out.println(f.getName() + "--->" + f.getModifiers());
-            try {
-                f.setAccessible(true);
-                System.out.println(f.getName() + ": " + f.get(user));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+    public static void sxh() {
+        int count = 0;
+        int a, b, c;
+        for (int i = 101; i < 1000; i++) {
+            a = i / 100;
+            //b = (i - (i / 100) * 100 - (i % 10)) / 10;
+            b = i / 10 % 10;
+            c = i % 10;
+            //System.out.println("a= " + a + ",b= " + b + ",c= " + c);
+            if ((a * a * a + b * b * b + c * c * c) == i) {
+                System.out.println(++count + ": " + i);
             }
-        });
+        }
+    }
+
+
+    public static void fblqsl() {
+        int f1 = 1, f2 = 1, f;
+        int M = 30;
+        System.out.println(f1);
+        System.out.println(f2);
+        for (int i = 3; i < M; i++) {
+            f = f2;
+            f2 = f1 + f2;
+            f1 = f;
+            System.out.println(f2);
+        }
     }
 }
