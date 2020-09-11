@@ -49,17 +49,14 @@ public class ContractObjUtils {
 
     /**
      * 比较两个实体属性值，返回一个map以有差异的属性名为key，value为一个Map分别存oldObject,newObject此属性名的值
-     *
      * @param oldObject 进行属性比较的对象1
      * @param newObject 进行属性比较的对象2
+     * @param fields 需要比较的属性列表，空比较所有属性
      * @return 属性差异比较结果map
      */
     public static Map<String, Map<String, Object>> compareFields(Object oldObject, Object newObject, List<String> fields) {
         Map<String, Map<String, Object>> map = null;
         try {
-            /**
-             * 只有两个对象都是同一类型的才有可比性
-             */
             if (oldObject.getClass() == newObject.getClass()) {
                 map = new HashMap<>();
                 Class<?> clazz = oldObject.getClass();
