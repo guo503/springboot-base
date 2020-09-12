@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 
-#mybatis-base-1.0.0.jar
 echo "------begin install-------"
 mvn clean install -Dmaven.test.skip=true
 echo "------installed-------"
