@@ -3,6 +3,7 @@ package com.tsyj.lamb;
 import com.google.common.collect.Lists;
 import com.tsyj.model.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class ListTest {
 
     public static void main(String[] args) {
-        joinField();
+        Runnable r = (Runnable & Serializable)() -> System.out.println("Serializable!");
     }
 
 

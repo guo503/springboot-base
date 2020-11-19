@@ -20,7 +20,7 @@ public class ModelConvertUtils {
             return t;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("对象convert出错");
+            throw new RuntimeException("对象convert出错!");
         }
 
     }
@@ -29,12 +29,12 @@ public class ModelConvertUtils {
      * 对象列表转换工具类
      *
      * @param target
-     * @param list   author  guos
-     *               date 2019/6/12 10:33
-     *               return
+     * @param list
+     * date 2019/6/12 10:33
+     * return
      **/
     public static <T, V> List<T> convertList(Class<T> target, List<V> list) {
-        if (list == null) {
+        if (CollectionUtils.isEmpty(list)) {
             throw new IllegalArgumentException("list is empty");
         }
         List<T> targetList = new ArrayList<T>();

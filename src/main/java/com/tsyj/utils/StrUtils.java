@@ -1,12 +1,22 @@
 package com.tsyj.utils;
 
+import com.google.common.collect.Lists;
+import com.tsyj.test.DrugTest;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @Description
@@ -15,7 +25,39 @@ import java.util.UUID;
  */
 public class StrUtils {
 
-    private final static String phone_ddl_lock = "UserAgtService_phone_ddl_%s";
+    private static final Pattern linePattern = Pattern.compile("_(\\w)");
+
+    private static final Pattern humpPattern = Pattern.compile("[A-Z]");
+
+
+    /**
+     * 驼峰转下划线,效率比上面高
+     */
+    public static String humpToLine2(String str) {
+        Matcher matcher = humpPattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+
+    /**
+     * 下划线转驼峰
+     */
+    public static String lineToHump(String str) {
+        str = str.toLowerCase();
+        Matcher matcher = linePattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
 
     /**
      * 生成uuid
@@ -48,7 +90,7 @@ public class StrUtils {
             if (i == str.length - 1) {
                 sb.append(getStr(str[i]));
             } else {
-                sb.append(getStr(str[i]) + split);
+                sb.append(getStr(str[i])).append(split);
             }
         }
         return sb.toString();
@@ -353,7 +395,6 @@ public class StrUtils {
     }
 
 
-
     /**
      * 获取绘本封面图片名字
      *
@@ -368,10 +409,61 @@ public class StrUtils {
     }
 
 
-    public static void main(String[] args) {
+    /**
+     * const转enum
+     *
+     * @param constClz
+     * @param key
+     * @param value
+     * @param desc
+     * @return
+     * @author guos
+     * @date 2020/11/19 19:20
+     **/
+    public static void constToEnum(Class constClz, String enumName, String key, String value, String desc) {
+        if (Objects.isNull(constClz)) {
+            return;
+        }
+        Object o;
+        try {
+            o = constClz.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(constClz.getName() + "创建对象失败!");
+        }
+        if (StringUtils.isEmpty(enumName) || StringUtils.isEmpty(key) || StringUtils.isEmpty(value)) {
+            throw new RuntimeException("enumName | key | value 不能为空!");
+        }
+        //静态属性
+        List<Field> fields = Lists.newArrayList(constClz.getDeclaredFields()).stream().filter(f ->
+                Modifier.isStatic(f.getModifiers())).collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(fields)) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Field f:fields) {
+            f.setAccessible(true);
+            try {
+                sb.append(enumName.toUpperCase())
+                        .append("(\"")
+                        .append(f.getName())
+                        .append("\",\"")
+                        .append(f.get(o));
+                if (!StringUtils.isEmpty(desc)) {
+                    sb.append(",\"").append(desc).append("\"");
+                }
+                sb.append("),");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                throw new RuntimeException(f.getName() + "属性无法访问!");
+            }
+        }
+    }
 
-        //System.out.println(picName("https://pdabc-dev.oss-cn-hangzhou.aliyuncs.com/huiben/L1_001_Farm_Animals_01.jpg"));
-        System.out.println(StrUtils.class.getName());
-        System.out.println(getRandomStr(10));
+
+    public static void main(String[] args) {
+        constToEnum(DrugTest.class, "drug", "key", "value", "desc");
     }
 }

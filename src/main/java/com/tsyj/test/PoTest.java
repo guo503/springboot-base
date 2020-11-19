@@ -1,5 +1,10 @@
 package com.tsyj.test;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
+
+import java.util.List;
+
 /**
  * @description:
  * @author: guos
@@ -9,7 +14,27 @@ public class PoTest {
 
     public static void main(String[] args) {
         //sxh();
-        fblqsl();
+        //
+        List<JSONObject> list= Lists.newArrayList();
+        JSONObject data1=new JSONObject();
+        data1.put("date","2020-10-12");
+
+        JSONObject data2=new JSONObject();
+        data2.put("date","2020-10-13");
+
+        JSONObject data3=new JSONObject();
+        data3.put("date","2020-10-14");
+
+        list.add(data1);
+        list.add(data2);
+        list.add(data3);
+
+        list.sort((o1, o2) -> o1.getDate("date").before(o2.getDate("date")) ? 0 : -1);
+
+        list.forEach(d->{
+            System.out.println(d);
+        });
+
     }
 
     public static void sxh() {
