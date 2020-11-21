@@ -27,6 +27,7 @@
         <com.squareup.okhttp.version>2.7.5</com.squareup.okhttp.version>
         <shiro.version>1.4.0</shiro.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
+        <docker.image.prefix>test</docker.image.prefix>
     </properties>
 
 
@@ -284,33 +285,37 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
+              <!--  <configuration>
                     <excludes>
                         <exclude>**/*.yml</exclude>
                         <exclude>**/*.xml</exclude>
                     </excludes>
-                </configuration>
+                </configuration>-->
             </plugin>
             <!-- spring boot repackage -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <layout>ZIP</layout>
-                    <includes>
-                        <include>
-                            <groupId>non-exists</groupId>
-                            <artifactId>non-exists</artifactId>
-                        </include>
-                    </includes>
+                    <fork>true</fork>
+                    <mainClass>com.tsyj.App</mainClass>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
