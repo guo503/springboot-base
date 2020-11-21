@@ -25,7 +25,7 @@
         <fastjson.version>1.2.31</fastjson.version>
         <guava.version>19.0</guava.version>
         <com.squareup.okhttp.version>2.7.5</com.squareup.okhttp.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.5.0</shiro.version>
         <shiro-redis.version>3.1.0</shiro-redis.version>
         <docker.image.prefix>test</docker.image.prefix>
     </properties>
