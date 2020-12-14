@@ -1,6 +1,7 @@
 package com.tsyj.shiro;
 
 import com.alibaba.fastjson.JSON;
+import com.tsyj.model.SysUser;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;

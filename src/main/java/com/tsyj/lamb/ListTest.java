@@ -1,6 +1,7 @@
 package com.tsyj.lamb;
 
 import com.google.common.collect.Lists;
+import com.tsyj.model.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 package com.tsyj.utils;
 
 import com.google.common.collect.Lists;
+import com.tsyj.model.User;
 import org.springframework.util.CollectionUtils;
 
 import java.beans.Introspector;

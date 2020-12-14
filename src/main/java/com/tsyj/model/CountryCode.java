@@ -11,7 +11,7 @@ import mybatis.core.annotation.Table;
 /**
 * 国际电话号码区号实体类
 * @author guos
-* @date 2020/12/11 19:55
+* @date 2020/12/12 16:28
 */
 @Table(name = "country_code")
 @Data
@@ -23,7 +23,7 @@ public class CountryCode implements Serializable {
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 334432733838921L;
+    private static final long serialVersionUID = 961435528171349L;
 
     /**
      * 

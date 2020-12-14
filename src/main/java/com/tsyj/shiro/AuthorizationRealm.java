@@ -1,7 +1,12 @@
 package com.tsyj.shiro;
 
 
+import com.tsyj.model.*;
 import com.tsyj.page.Page;
+import com.tsyj.service.SysMenuService;
+import com.tsyj.service.SysRoleMenuService;
+import com.tsyj.service.SysRoleService;
+import com.tsyj.service.SysUserRoleService;
 import lombok.extern.slf4j.Slf4j;
 import mybatis.core.entity.Condition;
 import org.apache.commons.collections.CollectionUtils;
